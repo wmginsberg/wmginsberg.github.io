@@ -19,21 +19,10 @@ app.get('/', function(req, res){
     res.sendFile("index.html", {root: '.'});
 });
 
-app.get('/blog', function(req, res){
-    res.sendFile("index.html", {root: '.'});
-});
-
-app.get('/poly-express', function(req, res){
+app.get('blog/poly-express', function(req, res){
     res.sendFile("blog/poly-express.html", {root: '.'});
 });
 
-app.get('/blog/poly-express', function(req, res){
-    res.sendFile("blog/poly-express.html", {root: '.'});
-});
-
-app.get('/blog/blog/poly-express', function(req, res){
-    res.sendFile("blog/poly-express.html", {root: '.'});
-});
 
 // Tell the app to listen for requests on port 3001
 app.listen(port, function () {
