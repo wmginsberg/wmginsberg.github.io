@@ -1,0 +1,19 @@
+{
+  "name": "wendy-site",
+  "description": "my personal site",
+  "engines": {
+    "node": "5.9.1"
+  },
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "4.13.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wmginsberg/wendy-tempi.git"
+  },
+  "license": "MIT"
+}

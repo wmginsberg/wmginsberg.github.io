@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<style>
+.text_container {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-left: 75px;
+    margin-right: 75px;
+}
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+.code_font {
+    font-family: "Courier New", Courier, monospace;
+}
+
+.code {
+    border: 1px solid gray;
+    padding: 10px;
+    margin: 5px;
+    font-family: "Courier New", Courier, monospace;
+    background-color: ghostwhite;
+}
+
+.warning {
+    background-color: mistyrose;
+    padding: 3px;
+}
+
+.note {
+    -background-color: lightgoldenrodyellow;
+    font-style: italic;
+    padding: 3px;
+}
+a {
+    color: darkslategray;
+}
+a:hover {
+    color: blueviolet;
+}
+</style>
+
+<head>
+  <title>Getting Started with Polymer and Express</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Getting started with Polymer and Express">
+  <meta name="keywords" content="Polymer, Express, server-side routing">
+  <meta name="author" content="Wendy Ginsberg">
+</head>
+
+<body>
+<div class="text_container">
+<h1> Getting Started with Polymer and Express </h1>
+<h5> 10 minute read </h5>
+<p>
+    As a library of Web Components, Polymer is back end agnostic, working entirely on the client side, or front end, of an application. This means that you can use whichever hosting service, database, or server technology that you’d like to handle the server-side, or back end, of your application.
+</p> 
+
+<p>
+    The flexibility of Web Components is liberating, because it enables developers to build front end UI the same way, regardless of which back end technologies they’re using. If you’ve developed a beautiful component-based UI and you’re looking to hook up back end logic, you’ve come to the right place. Here, I’ll give you a quick run-down of how to get a web app running with <a target="_blank" href="https://www.polymer-project.org">Polymer</a> and <a target="_blank" href="http://expressjs.com/">Express</a>. Afterward, we’ll talk a bit about applying the <a target="_blank" href="https://www.polymer-project.org/1.0/toolbox/server#prpl-pattern">PRPL</a> pattern, an optimization strategy for loading content in web applications.
+</p>
+
+<p class="note">
+    Note: this is not a step-by-step codelab. However, you can check out the corresponding github repo <a target="_blank" href="https://github.com/wmginsberg/poly-express">here</a>.
+</p>
+
+<p class="divider">
+--- 
+</p>
+
+<h2>
+    I. What is Express?
+</h2>
+<p>
+    One of the most popular server-side web frameworks is <a target="_blank" href="https://expressjs.com/">Express</a>. Brought to you by <a target="_blank" href="https://nodejs.org/en/">Node.js</a>, Express is incredibly lightweight and easy to use. With Express you can have a server up and running for your web or mobile application <a target="_blank" href="https://expressjs.com/en/starter/hello-world.html">in seconds</a>. In fact, we love Express so much that we built our <span class="code_font">polymer serve</span> <a target="_blank" href="https://www.polymer-project.org/1.0/docs/tools/polymer-cli#serve">CLI tool</a> with it! You might want to add Express to your application for server-side routing, templating, or middleware integration. 
+</p>
+
+<p>
+    With Polymer in the front and Express in the back, you can set up routing for your application. <strong>Routing</strong> refers to the way a web app can navigate from page to page via URLs and HTTP requests.
+</p>
+
+<p class="warning">
+    (!) Before you start, make sure you’ve installed Node and Express to process your server-side code, and Polymer and Bower to process your client-side code. 
+</p>
+
+<h2>
+    II. Setting Up Your Server
+</h2>
+<p>
+    You’ll want to start with a basic Express app that serves a static client folder with an <span class="code_font">index.html</span> file. Check out my <a target="_blank" href="https://github.com/wmginsberg/poly-express">poly-express github repo</a> to reference the directory structure I used. The file that houses that Express app server could be called <span class="code_font">server.js</span>, and would look something like this:
+</p> 
+
+<p class="code">
+    <span class="code_comment">// Node.js notation for importing packages</span><br />
+    var express = require('express');<br />
+    <br />
+    <span class="code_comment">// Spin up a server</span><br />
+    var app = express();<br />
+    <br />
+    <span class="code_comment">// Serve static files from the main build directory</span><br />
+    app.use(express.static(__dirname + '/build/bundled'));<br />
+    <br />
+    <span class="code_comment">// Render index.html on the main page, specify the root</span><br />
+    app.get('/', function(req, res){<br />
+    &emsp;    res.sendFile("index.html", {root: '.'});<br />
+    });<br />
+    <br />
+    <span class="code_comment">// Tell the app to listen for requests on port 3000</span><br />
+    app.listen(3000, function () {<br />
+    &emsp;   console.log('Example app listening on port 3000!');<br />
+    });<br />
+</p>
+
+<p>
+    The only thing you need to do differently to smartly connect an Express server to your Polymer project is ensure that your bower components and custom elements are all being served out of the same client-side public build directory. 
+</p>
+
+<p>
+    You can automatically direct the target download directory for bower_component installation by editing your bower config, or <span class="code_font">.bowerrc</span>, file. Your <span class="code_font">.bowerrc</span> file is a config file for your bower package that’s written in JSON. Just add this one small code snippet to the file, and you’re good to go. 
+</p>
+
+<p class="note">
+    Note: if you already have a bower_components folder, manually move it into the client folder first
+</p> 
+
+<p class="code">
+    { <br />
+    &emsp;"directory": "client/bower_components" <br />
+    } <br />
+</p>
+
+<p>
+    You can test this by installing an element via bower and checking the directory it downloads into. If it creates a <span class="code_font">bower_components/</span> folder in <span class="code_font">client/</span>, or installs into your already-existing <span class="code_font">client/bower_components/</span>, then it’s working! 
+</p>
+
+<h2>
+    III. Polishing Up The Front End
+</h2>
+<p>
+    What you have now is the groundwork for a single page app connected to an Express server, which is great, but we came here to add routes, so we’re only halfway there. 
+</p>
+
+<p>
+    There is a great Polymer element that can be used to construct modularized front-end routing, which is appropriately named <span class="code_font">&lt;app-route&gt;</span>. We’ve assembled a bunch of helpful app elements like <span class="code_font">&lt;app-route&gt;</span> in the <a target="_blank" href="https://www.polymer-project.org/1.0/toolbox/index">App Toolbox</a>’s <a target="_blank" href="https://www.polymer-project.org/1.0/toolbox/templates">App Template</a>. I’ll be using the App Template here, since it will install a Polymer app with client-side routing set up already.
+</p>
+
+<p>
+    If you want to add client-side routing to your existing Polymer project, your best bet would be to use <span class="code_font"><a target="_blank" href="https://beta.webcomponents.org/element/PolymerElements/app-route">&lt;app-route&gt;</a></span> and <span class="code_font"><a target="_blank" href="https://beta.webcomponents.org/element/PolymerElements/iron-pages">&lt;iron-pages&gt;</a></span> together, just like we’ve done in the App Template. As you can see from the basic <span class="code_font"><a target="_blank" href="https://beta.webcomponents.org/element/PolymerElements/iron-pages">&lt;iron-pages&gt;</a></span> example below, adding just one line of HTML adds a new route. 
+</p>
+
+<p class="code">
+    &lt;iron-pages selected="0"&gt;<br />
+    &emsp;&lt;div&gt;One&lt;/div&gt;<br />
+    &emsp;&lt;div&gt;Two&lt;/div&gt;<br />
+    &emsp;&lt;div&gt;Three&lt;/div&gt;<br />
+    &lt;/iron-pages&gt;<br />
+    <br />
+    <br />
+    &lt;script&gt;<br />
+    &emsp;document.addEventListener('click', function(e) {<br />
+    &emsp;&emsp;var pages = document.querySelector('iron-pages');<br />
+    &emsp;&emsp;pages.selectNext();<br />
+    &emsp;});<br />
+    &lt;/script&gt;<br />
+</p>
+
+<p>
+    Attach an <span class="code_font">attr-for-selected</span> to your inner pages to connect them, and include an iron selector with anchor tags to create navigation links. You can use the <span class="code_font"><a target="_blank" href="https://github.com/wmginsberg/poly-express/blob/master/client/my-app.html">my-app.html</a></span> file from the reference repo for guidance. 
+</p>
+
+<p class="warning">
+    (!) PSA/friendly reminder to make sure that the imports in your index.html file have absolute paths, meaning each import path has a slash (“/”) at the beginning, since you never know where the file will be accessed from.
+</p>
+
+<p>
+    When you’ve set everything up, and have run <span class="code_font">polymer build</span> to create your <span class="code_font">build/bundled</span> directory, you can run node <span class="code_font">server.js</span>, and see that you can click through and navigate from page to page. This means that client-side routing has been set up. This will make navigating around your app much quicker, and if you have a service worker set up, you have offline routing as well. Woohoo!
+</p>
+<p>
+    Great! So, now we have client-side routing, but now try accessing one of your new routes directly from your browser bar, or via a link. If you’re using the App Template try typing in <span class="code_font">localhost:8080/view3</span> and hitting enter, otherwise type in your own routes. You’ll notice that the page associated with view3 does not appear, and you get an ugly “<span class="code_font">Cannot GET /view3</span>” message. This will also happen if you’re on one of your routed URLs and try to refresh your current page. That’s because we’ve made an HTTP request to the server for “/view3” and the server has not yet been taught what that means. Computers are smart, but they’re not mindreaders.. yet. 
+</p>
+<h2>
+    IV. Adding Routes to the Server
+</h2>
+<p>
+    Since the current <span class="code_font">server.js</span> code has a listener on the wildcard character (‘*’) that serves the index.html page from any route, we do not need to explicitly add individual routes. This will also ensure that we’ll never need to fallback on a 404 page, since any page will be caught and redirected to index.html.
+</p>
+
+<p class="code">
+    <span class="code_comment">// Render index.html on the main page</span><br />
+    app.get('*', function(req, res){<br />
+    &emsp;    res.sendFile("index.html", {root: '.'});<br />
+    });<br />
+</p>
+
+<p>
+    You might be wondering why I left “index.html” as the file to render for every route. That’s because we are designing a single page app, where the client handles all of the routes. My <span class="code_font"><a target="_blank" href="https://beta.webcomponents.org/element/PolymerElements/app-route">&lt;app-route&gt;</a></span> and <span class="code_font"><a target="_blank" href="https://beta.webcomponents.org/element/PolymerElements/iron-pages">&lt;iron-pages&gt;</a></span>components are located in my top-level element, which is housed in <span class="code_font">index.html</span>. This code intercepts any <span class="code_font">GET</span> requests for routes (i.e.: “/view3”, “/view1”) that are sent to the server, processes them, and redirects the page to <span class="code_font">index.html</span> to make the appropriate routing call. By handling all of this in the client, we’ve built a quicker app, saving an entire round trip server visit on each request! 
+</p>
+
+<p>
+    After you set your server up with more routes, try accessing the page directly from the browser again. If it doesn’t work right away, make sure you’ve killed and restarted your node server in the command line, since you’ve edited server-side code. This will refresh the code that you’re running, and read your new routing rules properly. 
+</p>
+
+<p>
+    There you have it - server-side routing with Polymer and Express! This routing pattern can handle direct requests for various URLs, super quick on-site navigation, and (if you have a service worker set up) offline page-to-page navigation. Feel free to leave questions in the comments or share feedback on Twitter. This was not intended to be a step-by-step codelab, but rather an overview of how one might set up an Express server and server-side routing. 
+</p>
+<h2>
+    V. Some Thoughts on optimizing with the PRPL Pattern
+</h2>
+<p>
+    Because we started off with the App Template, we automatically get a service worker and efficient rendering when we run polymer build. However, our App doesn’t fully use our PRPL pattern. We are working on a few things that will make this more straightforward, and will report back on those soon. In the interim, I’ll give you an overview of what we do and don’t have with the PRPL pattern. 
+</p>
+
+<p>
+    <ul>
+     <li>Push: we have not used HTTP2/push to serve our files.
+     <li>Render only the critical route: we have partially done this by using the App Template.
+     <li>Pre-cache the necessary files: since we have a service worker, we are smartly caching the necessary fragments.
+     <li>Lazy load the files: we have not done this.
+    </ul>
+</p>
+</div>
+</body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-87601009-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</html>
+
+
