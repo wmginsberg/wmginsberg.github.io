@@ -23,7 +23,15 @@ app.get('/blog', function(req, res){
     res.sendFile("index.html", {root: '.'});
 });
 
+app.get('/poly-express', function(req, res){
+    res.sendFile("blog/poly-express.html", {root: '.'});
+});
+
 app.get('/blog/poly-express', function(req, res){
+    res.sendFile("blog/poly-express.html", {root: '.'});
+});
+
+app.get('/blog/blog/poly-express', function(req, res){
     res.sendFile("blog/poly-express.html", {root: '.'});
 });
 

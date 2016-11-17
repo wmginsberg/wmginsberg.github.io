@@ -10,6 +10,15 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
 }
+html {
+    background-color: white;
+}
+p {
+    line-height: 1.3;
+}
+h1,h2 {
+    font-family: "Lucida Console", Monaco, monospace;
+}
 .code_font {
     font-family: "Courier New", Courier, monospace;
 }
@@ -19,11 +28,11 @@ body {
     padding: 10px;
     margin: 5px;
     font-family: "Courier New", Courier, monospace;
-    background-color: ghostwhite;
+    background-color: #f3ecff;
 }
 
 .warning {
-    background-color: mistyrose;
+    background-color: #ecf8ff;
     padding: 3px;
 }
 
@@ -34,14 +43,24 @@ body {
 }
 a {
     color: darkslategray;
+    text-decoration: none;
+    font-weight: bold;
 }
 a:hover {
-    color: blueviolet;
+    color: #893BFF;
+    background-color: #f8ffec;
+}
+
+::selection {
+  background: #f8ffec; /* WebKit/Blink Browsers */
+}
+::-moz-selection {
+  background: #f8ffec; /* Gecko Browsers */
 }
 </style>
 
 <head>
-  <title>Getting Started with Polymer and Express</title>
+  <title>Routing with Polymer and Express</title>
   <meta charset="UTF-8">
   <meta name="description" content="Getting started with Polymer and Express">
   <meta name="keywords" content="Polymer, Express, server-side routing">
@@ -50,14 +69,14 @@ a:hover {
 
 <body>
 <div class="text_container">
-<h1> Getting Started with Polymer and Express </h1>
+<h1> Routing with Polymer and Express </h1>
 <h5> 10 minute read </h5>
 <p>
     As a library of Web Components, Polymer is back end agnostic, working entirely on the client side, or front end, of an application. This means that you can use whichever hosting service, database, or server technology that you’d like to handle the server-side, or back end, of your application.
 </p> 
 
 <p>
-    The flexibility of Web Components is liberating, because it enables developers to build front end UI the same way, regardless of which back end technologies they’re using. If you’ve developed a beautiful component-based UI and you’re looking to hook up back end logic, you’ve come to the right place. Here, I’ll give you a quick run-down of how to get a web app running with <a target="_blank" href="https://www.polymer-project.org">Polymer</a> and <a target="_blank" href="http://expressjs.com/">Express</a>. Afterward, we’ll talk a bit about applying the <a target="_blank" href="https://www.polymer-project.org/1.0/toolbox/server#prpl-pattern">PRPL</a> pattern, an optimization strategy for loading content in web applications.
+    The flexibility of Web Components is liberating, because it enables developers to build front end UI the same way, regardless of which back end technologies they’re using. If you’ve developed a beautiful component-based UI and you’re looking to hook up back end logic, you’ve come to the right place. Here, I’ll give you a quick run-down of how to add server-side and client-side routing for your web app with <a target="_blank" href="https://www.polymer-project.org">Polymer</a> and <a target="_blank" href="http://expressjs.com/">Express</a>. Afterward, we’ll talk a bit about applying the <a target="_blank" href="https://www.polymer-project.org/1.0/toolbox/server#prpl-pattern">PRPL</a> pattern, an optimization strategy for loading content in web applications.
 </p>
 
 <p class="note">
@@ -193,7 +212,7 @@ a:hover {
 </p>
 
 <p>
-    You might be wondering why I left “index.html” as the file to render for every route. That’s because we are designing a single page app, where the client handles all of the routes. My <span class="code_font"><a target="_blank" href="https://beta.webcomponents.org/element/PolymerElements/app-route">&lt;app-route&gt;</a></span> and <span class="code_font"><a target="_blank" href="https://beta.webcomponents.org/element/PolymerElements/iron-pages">&lt;iron-pages&gt;</a></span>components are located in my top-level element, which is housed in <span class="code_font">index.html</span>. This code intercepts any <span class="code_font">GET</span> requests for routes (i.e.: “/view3”, “/view1”) that are sent to the server, processes them, and redirects the page to <span class="code_font">index.html</span> to make the appropriate routing call. By handling all of this in the client, we’ve built a quicker app, saving an entire round trip server visit on each request! 
+    You might be wondering why I left “index.html” as the file to render for every route. That’s because we are designing a single page app, where the client handles all of the routes. My <span class="code_font"><a target="_blank" href="https://beta.webcomponents.org/element/PolymerElements/app-route">&lt;app-route&gt;</a></span> and <span class="code_font"><a target="_blank" href="https://beta.webcomponents.org/element/PolymerElements/iron-pages">&lt;iron-pages&gt;</a></span> components are located in my top-level element, which is housed in <span class="code_font">index.html</span>. This code intercepts any <span class="code_font">GET</span> requests for routes (i.e.: “/view3”, “/view1”) that are sent to the server, processes them, and redirects the page to <span class="code_font">index.html</span> to make the appropriate routing call. By handling all of this in the client, we’ve built a quicker app, saving an entire round trip server visit on each request! 
 </p>
 
 <p>
