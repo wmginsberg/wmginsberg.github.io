@@ -71,7 +71,7 @@ a:hover {
 <body>
 <div class="text_container">
 <h1> Routing with Polymer and Express </h1>
-<h5> 10 minute read </h5>
+<h5> Posted by <a target="_blank" href="https://twitter.com/wmginsberg">wmginsberg</a> on nov 17th, 2016 | 10 minute read </h5>
 <p>
     As a library of Web Components, Polymer is back end agnostic, working entirely on the client side, or front end, of an application. This means that you can use whichever hosting service, database, or server technology that you’d like to handle the server-side, or back end, of your application.
 </p> 
@@ -223,15 +223,18 @@ a:hover {
     V. Some Thoughts on optimizing with the PRPL Pattern
 </h2>
 <p>
-    Because we started off with the App Template, we automatically get a service worker and efficient rendering when we run polymer build. However, our App doesn’t fully use our PRPL pattern. We are working on a few things that will make this more straightforward, and will report back on those soon. In the interim, I’ll give you an overview of what we do and don’t have with the PRPL pattern. 
+    Because we started off with the App Template, we automatically get a service worker and efficient rendering when we run polymer build. However, our App doesn’t fully use our PRPL pattern, since we send down the entire app for every route. This works fine for a small app, but for a giant app with a couple dozen routes, or even fewer heavy routes, you'd want to smartly bundle or sharp your app routes. 
+</p>
+<p>
+    We are working on a something that will make this more straightforward, and will report back on those soon. In the interim, I’ll give you an overview of what we do and don’t have with the PRPL pattern. 
 </p>
 
 <p>
     <ul>
-     <li>Push: we have not used HTTP2/push to serve our files.
-     <li>Render only the critical route: we have partially done this by using the App Template.
-     <li>Pre-cache the necessary files: since we have a service worker, we are smartly caching the necessary fragments.
-     <li>Lazy load the files: we have not done this.
+     <li><strong>Push</strong>: we have not used HTTP2/push to serve our files.
+     <li><strong>Render</strong> only the critical route: we have partially done this by using the App Template on the client, but our server sends the entire app for any request.
+     <li><strong>Pre-cache</strong> the necessary files: since we have a service worker, we are smartly caching the necessary fragments.
+     <li><strong>Lazy load</strong> your content: we have not done this.
     </ul>
 </p>
 </div>
