@@ -57,6 +57,16 @@ a:hover {
 ::-moz-selection {
   background: #f8ffec; /* Gecko Browsers */
 }
+figure, img, figcaption {
+    max-height: 500px;
+    margin: auto;
+    display: block;
+    text-align: center;
+}
+ol {
+    list-style-type: upper-roman;
+    font-family: "Courier New", Courier, monospace;
+}
 </style>
 
 <head>
@@ -81,7 +91,7 @@ a:hover {
 </p>
 
 <p class="note">
-    Note: this is not a step-by-step codelab. However, you can check out the corresponding github repo <a target="_blank" href="https://github.com/wmginsberg/poly-express">here</a>.
+    Note: this is not a step-by-step codelab. However, you can follow along by checking out the corresponding <a target="_blank" href="https://github.com/wmginsberg/poly-express">✨github repo✨</a>.
 </p>
 
 <p class="divider">
@@ -107,7 +117,30 @@ a:hover {
     II. Setting Up Your Server
 </h2>
 <p>
-    You’ll want to start with a basic Express app that serves a static client folder with an <span class="code_font">index.html</span> file. Check out my <a target="_blank" href="https://github.com/wmginsberg/poly-express">poly-express github repo</a> to reference the directory structure I used. The file that houses that Express app server could be called <span class="code_font">server.js</span>, and would look something like this:
+    You’ll want to start with a basic Express app that serves a static client folder with an <span class="code_font">index.html</span> file. This is a high-level sketch of my file structure.
+</p>
+<p class="code">
+poly-express/<br />
+├── bower.json<br />
+├── build/<br />
+│   ├── bundled/<br />
+│   └── unbundled/<br />
+├── client/<br />
+│   ├── bower_components/<br />
+│   ├── my-app.html<br />
+│   ├── my-icons.html<br />
+│   ├── my-view1.html<br />
+│   ├── my-view2.html<br />
+│   └── my-view3.html<br />
+├── index.html<br />
+├── manifest.json<br />
+├── node_modules/<br />
+├── polymer.json<br />
+└── server.js<br />
+
+</p>
+<p>
+    If you want a deeper look, you can check out my <a target="_blank" href="https://github.com/wmginsberg/poly-express">poly-express github repo</a> to reference the directory I used in greater detail. The file that houses that Express app server could be called <span class="code_font">server.js</span>, and would look something like this:
 </p> 
 
 <p class="code">
@@ -157,11 +190,11 @@ a:hover {
 </p>
 
 <p>
-    There is a great Polymer element that can be used to construct modularized front-end routing, which is appropriately named <span class="code_font">&lt;app-route&gt;</span>. We’ve assembled a bunch of helpful app elements like <span class="code_font">&lt;app-route&gt;</span> in the <a target="_blank" href="https://www.polymer-project.org/1.0/toolbox/index">App Toolbox</a>’s <a target="_blank" href="https://www.polymer-project.org/1.0/toolbox/templates">App Template</a>. I’ll be using the App Template here, since it will install a Polymer app with client-side routing set up already.
+    There is a Polymer element that can be used to construct modularized front-end routing, which is appropriately named <span class="code_font">&lt;app-route&gt;</span>. We’ve assembled a bunch of helpful app elements like <span class="code_font">&lt;app-route&gt;</span> in the <a target="_blank" href="https://www.polymer-project.org/1.0/toolbox/index">App Toolbox</a>’s <a target="_blank" href="https://www.polymer-project.org/1.0/toolbox/templates">App Template</a>. I’ll be using the App Template here, since it will install a Polymer app with client-side routing set up already.
 </p>
 
 <p>
-    If you want to add client-side routing to your existing Polymer project, your best bet would be to use <span class="code_font"><a target="_blank" href="https://beta.webcomponents.org/element/PolymerElements/app-route">&lt;app-route&gt;</a></span> and <span class="code_font"><a target="_blank" href="https://beta.webcomponents.org/element/PolymerElements/iron-pages">&lt;iron-pages&gt;</a></span> together, just like we’ve done in the App Template. As you can see from the basic <span class="code_font"><a target="_blank" href="https://beta.webcomponents.org/element/PolymerElements/iron-pages">&lt;iron-pages&gt;</a></span> example below, adding just one line of HTML adds a new route. 
+    If you want to add client-side routing to your existing Polymer project, your best bet would be to use <span class="code_font"><a target="_blank" href="https://beta.webcomponents.org/element/PolymerElements/app-route">&lt;app-route&gt;</a></span> and <span class="code_font"><a target="_blank" href="https://beta.webcomponents.org/element/PolymerElements/iron-pages">&lt;iron-pages&gt;</a></span> together, just like we’ve done in the App Template. If you're using the App Template, this is all done for you automatically, but if you're working from scratch you'll need to include these elements manually. You can use the <span class="code_font"><a target="_blank" href="https://github.com/wmginsberg/poly-express/blob/master/client/my-app.html">my-app.html</a></span> file from the reference repo for guidance, or check out our documentation. As you can see from the basic <span class="code_font"><a target="_blank" href="https://beta.webcomponents.org/element/PolymerElements/iron-pages">&lt;iron-pages&gt;</a></span> example below, adding just one line of HTML adds a new route. 
 </p>
 
 <p class="code">
@@ -181,7 +214,7 @@ a:hover {
 </p>
 
 <p>
-    Attach an <span class="code_font">attr-for-selected</span> to your inner pages to connect them, and include an iron selector with anchor tags to create navigation links. You can use the <span class="code_font"><a target="_blank" href="https://github.com/wmginsberg/poly-express/blob/master/client/my-app.html">my-app.html</a></span> file from the reference repo for guidance. 
+    Attach an <span class="code_font">attr-for-selected</span> to your inner pages to connect them, and include an iron selector with anchor tags to create navigation links. 
 </p>
 
 <p class="warning">
@@ -189,35 +222,48 @@ a:hover {
 </p>
 
 <p>
-    When you’ve set everything up, and have run <span class="code_font">polymer build</span> to create your <span class="code_font">build/bundled</span> directory, you can run node <span class="code_font">server.js</span>, and see that you can click through and navigate from page to page. This means that client-side routing has been set up. This will make navigating around your app much quicker, and if you have a service worker set up, you have offline routing as well. Woohoo!
+    When you’ve set everything up, and have run <span class="code_font">polymer build</span> to create your <span class="code_font">build/bundled</span> directory, you can run <span class="code_font">node server.js</span>, and see that you can click through and navigate from page to page. This means that client-side routing has been set up. This will make navigating around your app much quicker, and if you have a service worker set up, you have offline routing as well. Woohoo!
 </p>
 <p>
-    Great! So, now we have client-side routing, but now try accessing one of your new routes directly from your browser bar, or via a link. If you’re using the App Template try typing in <span class="code_font">localhost:8080/view3</span> and hitting enter, otherwise type in your own routes. You’ll notice that the page associated with view3 does not appear, and you get an ugly “<span class="code_font">Cannot GET /view3</span>” message. This will also happen if you’re on one of your routed URLs and try to refresh your current page. That’s because we’ve made an HTTP request to the server for “/view3” and the server has not yet been taught what that means. Computers are smart, but they’re not mindreaders.. yet. 
+    So, now we have client-side routing and a server, but now try accessing one of your new routes directly from your browser bar, or via a link. If you’re using the App Template try typing in <span class="code_font">localhost:8080/view3</span> and hitting enter, otherwise type in your own routes. You’ll notice that the page associated with <span class="code_font">view3</span> does not appear, and you get an ugly <span class="code_font">"Cannot GET /view3"</span> message. This will also happen if you’re on one of your routed URLs and try to refresh your current page. That’s because we’ve made an HTTP request to the server for <span class="code_font">“/view3”</span> and the server has not yet been taught what that means. Computers are smart, but they’re not mindreaders.. yet. 
 </p>
 <h2>
     IV. Adding Routes to the Server
 </h2>
 <p>
-    Since the current <span class="code_font">server.js</span> code has a listener on the wildcard character (‘*’) that serves the index.html page from any route, we do not need to explicitly add individual routes. This will also ensure that we’ll never need to fallback on a 404 page, since any page will be caught and redirected to index.html.
+    Our current <span class="code_font">server.js</span> code has a listener to serve <span class="code_font">index.html</span> from the main route, or slash character (<span class="code_font">'/'</span>), but we want our server to know to serve <span class="code_font">index.html</span> from any route. To do this, we can simply replace our slash character (<span class="code_font">'/'</span>) with a wildcard character (<span class="code_font">‘*’</span>). The wildcard encompasses all possible strings that can follow the slash, so the server will serve the <span class="code_font">index.html</span> page from any route. Now, we do not need to explicitly add individual routes. This will also ensure that we’ll never need to fallback on a <span class="code_font">404</span> page, since any page will be caught and redirected to <span class="code_font">index.html</span>. Implementation here:
 </p>
 
 <p class="code">
+    ... <br />
+    <br />
     <span class="code_comment">// Render index.html on the main page</span><br />
     app.get('*', function(req, res){<br />
     &emsp;    res.sendFile("index.html", {root: '.'});<br />
     });<br />
+    <br />
+    ...
 </p>
 
 <p>
-    You might be wondering why I left “index.html” as the file to render for every route. That’s because we are designing a single page app, where the client handles all of the routes. My <span class="code_font"><a target="_blank" href="https://beta.webcomponents.org/element/PolymerElements/app-route">&lt;app-route&gt;</a></span> and <span class="code_font"><a target="_blank" href="https://beta.webcomponents.org/element/PolymerElements/iron-pages">&lt;iron-pages&gt;</a></span> components are located in my top-level element, which is housed in <span class="code_font">index.html</span>. This code intercepts any <span class="code_font">GET</span> requests for routes (i.e.: “/view3”, “/view1”) that are sent to the server, processes them, and redirects the page to <span class="code_font">index.html</span> to make the appropriate routing call. By handling all of this in the client, we’ve built a quicker app, saving an entire round trip server visit on each request! 
+    You might be wondering why I left “index.html” as the file to render for every route. That’s because we are designing a single page app, where the client handles all of the routes. My <span class="code_font"><a target="_blank" href="https://beta.webcomponents.org/element/PolymerElements/app-route">&lt;app-route&gt;</a></span> and <span class="code_font"><a target="_blank" href="https://beta.webcomponents.org/element/PolymerElements/iron-pages">&lt;iron-pages&gt;</a></span>  components are located in my top-level element, <span class="code_font">&lt;my-app&gt;</span> which is housed in <span class="code_font">index.html</span>. This code intercepts any <span class="code_font">GET</span> requests for routes (i.e.: “/view3”, “/view1”) that are sent to the server, processes them, and redirects the page to <span class="code_font">index.html</span> to make the appropriate routing call. By handling all of this in the client, we’ve built a quicker app, saving an entire round trip server visit on each request! Check out the diagram below for an illustration of how a request from the client bounces to the server, is processed, returns to the client, and is routed to the corresponding view. 
 </p>
 
 <p>
-    After you set your server up with more routes, try accessing the page directly from the browser again. If it doesn’t work right away, make sure you’ve killed and restarted your node server in the command line, since you’ve edited server-side code. This will refresh the code that you’re running, and read your new routing rules properly. 
+    <figure>
+        <img src="/images/app-route.png"/> 
+        <figcaption><em>A page request's bold journey from client to server, to client again.</em></figcaption>
+    </figure>
+<br />
+<br />
 </p>
 
 <p>
-    There you have it - server-side routing with Polymer and Express! This routing pattern can handle direct requests for various URLs, super quick on-site navigation, and (if you have a service worker set up) offline page-to-page navigation. Feel free to leave questions in the comments or share feedback on Twitter. This was not intended to be a step-by-step codelab, but rather an overview of how one might set up an Express server and server-side routing. 
+    Now that you've set your server up to process all routes, try accessing your pages directly from the browser again. If it doesn’t work right away, make sure you’ve killed and restarted your node server in the command line, since you’ve edited server-side code. This will refresh the code that you’re running, and read your new routing rules properly. 
+</p>
+
+<p>
+    There you have it - server-side routing with Polymer and Express! This routing pattern can handle direct requests for various URLs, super quick on-site navigation, and (if you have a service worker set up) offline page-to-page navigation. Feel free to send questions over on <a target="_blank" href="https://twitter.com/wmginsberg">Twitter</a>, or as issues on the <a target="_blank" href="https://github.com/wmginsberg/poly-express">repo</a>! 
 </p>
 <h2>
     V. Some Thoughts on optimizing with the PRPL Pattern
