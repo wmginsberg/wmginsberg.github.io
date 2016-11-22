@@ -20,7 +20,7 @@ app.get('/', function(req, res){
 });
 
 app.get('/poly-express', function(req, res){
-    res.sendFile("blog/poly-express.html", {root: '.'});
+    res.sendFile("/blog/poly-express.html", {root: '.'});
 });
 
 
