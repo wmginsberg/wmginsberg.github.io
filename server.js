@@ -23,6 +23,10 @@ app.get('/poly-express', function(req, res){
     res.sendFile("/blog/poly-express.html", {root: '.'});
 });
 
+app.get('/silly-apps', function(req, res){
+    res.sendFile("/blog/silly-apps.html", {root: '.'});
+});
+
 
 // Tell the app to listen for requests on port 3001
 app.listen(port, function () {
