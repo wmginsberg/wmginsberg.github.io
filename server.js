@@ -19,7 +19,7 @@ app.get('/', function(req, res){
     res.sendFile("index.html", {root: '.'});
 });
 
-app.get('/poly-express', function(req, res){
+app.get('/blog/poly-express', function(req, res){
     res.sendFile("/blog/poly-express.html", {root: '.'});
 });
 
