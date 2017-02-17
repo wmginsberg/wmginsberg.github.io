@@ -23,6 +23,10 @@ app.get('/blog/poly-express', function(req, res){
     res.sendFile("/blog/poly-express.html", {root: '.'});
 });
 
+app.get('/blog/poly-flask', function(req, res){
+    res.sendFile("/blog/poly-flask.html", {root: '.'});
+});
+
 app.get('/silly-apps', function(req, res){
     res.sendFile("/blog/silly-apps.html", {root: '.'});
 });

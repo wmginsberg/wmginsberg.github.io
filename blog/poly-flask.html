@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<style>
+.text_container {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-left: 75px;
+    margin-right: 75px;
+}
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+html {
+    background-color: white;
+}
+p {
+    line-height: 1.3;
+}
+h1,h2 {
+    font-family: "Lucida Console", Monaco, monospace;
+}
+.code_font {
+    font-family: "Courier New", Courier, monospace;
+}
+
+.code {
+    border: 1px solid gray;
+    padding: 10px;
+    margin: 5px;
+    font-family: "Courier New", Courier, monospace;
+    background-color: #f3ecff;
+}
+
+.warning {
+    background-color: #ecf8ff;
+    padding: 3px;
+}
+
+.note {
+    -background-color: lightgoldenrodyellow;
+    font-style: italic;
+    padding: 3px;
+}
+a {
+    color: darkslategray;
+    text-decoration: none;
+    font-weight: bold;
+}
+a:hover {
+    color: #893BFF;
+    background-color: #f8ffec;
+}
+
+::selection {
+  background: #f8ffec; /* WebKit/Blink Browsers */
+}
+::-moz-selection {
+  background: #f8ffec; /* Gecko Browsers */
+}
+figure, img, figcaption {
+    max-height: 500px;
+    margin: auto;
+    display: block;
+    text-align: center;
+}
+ol {
+    list-style-type: upper-roman;
+    font-family: "Courier New", Courier, monospace;
+}
+</style>
+
+<head>
+  <title>Routing with Polymer and Express</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Getting started with Polymer and Express">
+  <meta name="keywords" content="Polymer, Express, server-side routing">
+  <meta name="author" content="Wendy Ginsberg">
+  <link rel='shortcut icon' href='../images/favicon.ico' type='image/x-icon'/ >
+</head>
+
+<body>
+<div class="text_container">
+<h1> Routing with Polymer and Flask </h1>
+<h5> Posted by <a target="_blank" href="https://twitter.com/wmginsberg">wmginsberg</a> on feb 17th, 2017 | 10 minute read </h5>
+<p>
+    This is the second guide on server-side routing with Polymer, with advice on how to attach a <a target="_blank" href="http://flask.pocoo.org/">Flask</a> server to Polymer Starter Kit. The first walks through getting (PSK) connected with Express. 
+</p> 
+
+<p>
+    As mentioned in the <a target="_blank" href="https://wmginsberg.github.io/blog/poly-express">Routing with Polymer and Express article</a>, Polymer only helps build the front end of your application. Your server-side technology is entirely up to you. From attending University hackathons as a sponsor, I’ve noticed many young developers are using <a target="_blank" href="http://flask.pocoo.org/">Flask</a>. Flask is a highly flexible and elegant Python server. Generally, it is used with a templating framework, <a target="_blank" href="">Jinja2</a>, but if you’d like to load data with a library like <a target="_blank" href="">Redux</a> or <a target="_blank" href="">Uniflow</a>, you can set up your project without one. This guide will walk through setting up a Polymer + Flask project without Jinja2.
+</p>
+
+<p class="note">
+    Note: this is an overview, not a step-by-step codelab. However, you can follow along by checking out the corresponding <a target="_blank" href="https://github.com/wmginsberg/poly-flask">✨github repo✨</a>.
+</p>
+
+<p class="divider">
+--- 
+</p>
+
+<h2>
+    I. What is Flask?
+</h2>
+<p>
+    Flask is a self-described ~“micro web development framework for Python.”~ By “micro” framework, they mean that Flask is as lightweight and extensible as possible. Rather than making decisions for you about which database or auth service (etc) you ought to use, Flask remains bare and offers up a bunch of extensions that you can add piecemeal. Even though it’s simple and small, it is certainly production-grade and ready to scale with your app. A quick search shows that Twilio and Pinterest seem to be using it in production. 
+</p>
+
+<p>
+ You can install Flask via <span class="code_font">pip</span> - follow <a target="_blank" href=""></a>these instructions</a> from the Flask site to get your machine up to date. 
+</p>
+
+<h2>
+    II. Setting up your server
+</h2>
+<p>
+    There are only three quick steps to spin up a Flask server. 
+</p>
+<p>
+    1. Create a new directory and create a new python file inside it. I’m naming my directory <span class="code_font">poly-flask/</span> and my file <span class="code_font">app.py</span>.  Add the code below into your <span class="code_font">app.py</span> file.
+</p>
+
+<p class="code">
+    // Import necessary library <br />
+    from flask import Flask <br />
+    <br />
+    // Instantiate a Flask app <br />
+    app = Flask(__name__) <br />
+    <br />
+    // Program the main route to send ‘Hello, World’ <br />
+    @app.route('/') <br />
+    def hello_world(): <br />
+    &emsp;return 'Hello, World!'
+</p>
+<p>
+    2. Update the FLASK_APP variable in your terminal, so you run the right file. Remember to swap out “app.py” if you named your file differently. And, if you’re using Windows, you’ll want to swap out “export” for “set”. 
+</p> 
+<p class="code">
+    $ export FLASK_APP=app.py
+</p>
+<p>
+    3. Start the server. 
+</p> 
+<p class="code">
+    $ flask run
+</p>
+<p>
+    ...and now it should be running locally! Visit <a target="_blank" href="">http://127.0.0.1:5000/</a> to see your “Hello, World!” message. If you need to troubleshoot, or want to run an externally visible server, please refer to Flask’s <a target="_blank" href="">Quickstart guide</a>. 
+</p>
+
+<h2>
+    III. Bringing in the front end
+</h2>
+<p>
+    For simplicity, I’ll be using Polymer Starter Kit in this article. <a target="_blank" href="">Install the Polymer CLI</a>, so you can run <span class="code_font">polymer init starter-kit</span> within your directory, and a fresh PSK will appear within seconds. 
+</p>
+
+<p>
+    Flask has default naming for your static and template files, which are cleverly titled <span class="code_font">static</span> and <span class="code_font">templates</span>. These can be changed, but I’m going to stick it for simplicity. Since we’re not using templates in this example, we won’t need a templates folder. Now, create a folder called <span class="code_font">static</span> and move <span class="code_font">index.html</span>, <span class="code_font">src/</span>, and <span class="code_font">bower_components/</span> into it. This is the equivalent of your client folder in the Express scenario. 
+</p>
+
+<p>
+    Since you’ve moved your <span class="code_font">bower_components/</span> folder, you’ll need to adjust your .bowerrc file. Adjust it (or create one if you don’t already have one), so Bower knows where to install new components.  
+</p>
+
+<p class="code">
+    { <br />
+    &emsp;"directory": "static/bower_components" <br />
+    } 
+</p>
+
+<p>
+    For reference, this is what my <span class="code_font">poly-flask/</span> directory looks like now. Hidden files are not shown.  
+</p>
+
+<p class="code">
+    poly-flask/ <br />
+    ├── README.md <br />
+    ├── app.py <br />
+    ├── app.pyc <br />
+    ├── bower.json <br />
+    ├── images/ <br />
+    ├── manifest.json <br />
+    ├── package.json <br />
+    ├── polymer.json <br />
+    ├── static <br />
+    │&emsp;├── bower_components/ <br />
+    │&emsp;├── index.html <br />
+    │&emsp;└── src <br />
+    │&emsp;&emsp;├── my-app.html <br />
+    │&emsp;&emsp;├── my-icons.html <br />
+    │&emsp;&emsp;├── my-view1.html <br />
+    │&emsp;&emsp;├── my-view2.html <br />
+    │&emsp;&emsp;├── my-view3.html <br />
+    │&emsp;&emsp;├── my-view404.html <br />
+    │&emsp;&emsp;└── shared-styles.html
+</p>
+
+<h2>
+    IV. Adding routes to the server
+</h2>
+<p>
+    Adding routes to a Flask server is simple and declarative. Since we are building a single-page app with Polymer Starter Kit, where routes are all directed to <span class="code_font">index.html</span> and App Toolbox elements process URL changes for us, our work here is just a few lines of code. We need to add the various routes and send our static <span class="code_font">index.html</span> file rather than a plain string. Below is the new <span class="code_font">app.py</span> file that can handle the PSK routes, setting up the server for our single page app.  
+</p>
+
+<p class="code">
+    // Import necessary libraries <br />
+    from flask import Flask, current_app <br />
+    <br />
+    // Instantiate a Flask app <br />
+    app = Flask(__name__) <br />
+    <br />
+    // Program various routes to send the static index.html file to the current app <br />
+    @app.route('/') <br />
+    @app.route('/view1') <br />
+    @app.route('/view2') <br />
+    @app.route('/view3') <br />
+    def index(): <br />
+    &emsp;return current_app.send_static_file('index.html')
+</p>
+
+<p>
+    If you’d rather just have a catch-all implementation for any route, rather than adding them one by one like I did above, Flask makes this possible too.  
+</p>
+
+<p class="code">
+    // Import necessary libraries <br />
+    from flask import Flask, current_app <br />
+    <br />
+    // Instantiate a Flask app <br />
+    app = Flask(__name__) <br />
+    <br />
+    // Program catch-all for routes to send the static index.html file to the current app <br />
+    @app.route('/', defaults={'path': ''}) <br />
+    @app.route('/&lt;path:path&gt;') <br />
+    def index(path): <br />
+    &emsp;return current_app.send_static_file('index.html') <br />
+</p>
+
+<h2>
+    IV. Why are you always sending `index.html`?
+</h2>
+
+<p>
+    That’s because we are designing a single page app, where the client handles all of the routes. My <span class="code_font"><a target="_blank" href="https://beta.webcomponents.org/element/PolymerElements/app-route">&lt;app-route&gt;</a></span> and <span class="code_font"><a target="_blank" href="https://beta.webcomponents.org/element/PolymerElements/iron-pages">&lt;iron-pages&gt;</a></span>  components are located in my top-level element, <span class="code_font">&lt;my-app&gt;</span> which is housed in <span class="code_font">index.html</span>. 
+</p>
+<p>
+    That code intercepts any <span class="code_font">GET</span> requests for routes (i.e.: “/view3”, “/view1”) that are sent to the server, processes them, and redirects the page to <span class="code_font">index.html</span> to make the appropriate routing call. By handling all of this in the client, we’ve built a quicker app, saving an entire round trip server visit on each request! Check out the diagram below for an illustration of how a request from the client bounces to the server, is processed, returns to the client, and is routed to the corresponding view. 
+</p>
+<p>
+    <figure>
+        <img src="/images/App-route-py.png"/> 
+        <figcaption><em>A page request's bold journey from client to server, to client again.</em></figcaption>
+    </figure>
+<br />
+<br />
+</p>
+
+<p>
+    Now that you've set your server up to process all routes, try accessing your pages directly from the browser again. If it doesn’t work right away, make sure you’ve killed and restarted your node server in the command line, since you’ve edited server-side code. This will refresh the code that you’re running, and read your new routing rules properly. 
+</p>
+
+<p>
+    Now, Polymer Starter Kit is served with Flask, with supported routing both client- and server-side! This routing pattern can handle direct requests for various URLs, super quick on-site navigation, and (if you have a service worker set up) offline page-to-page navigation. Feel free to send questions over on <a target="_blank" href="https://twitter.com/wmginsberg">Twitter</a>, or as issues on the <a target="_blank" href="https://github.com/wmginsberg/poly-flask">repo</a>! 
+</p>
+</div>
+</body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-87601009-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</html>
+
+
