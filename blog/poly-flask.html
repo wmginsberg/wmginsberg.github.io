@@ -87,7 +87,7 @@ ol {
 </p> 
 
 <p>
-    As mentioned in the <a target="_blank" href="https://wmginsberg.github.io/blog/poly-express">Routing with Polymer and Express article</a>, Polymer only helps build the front end of your application. Your server-side technology is entirely up to you. From attending University hackathons as a sponsor, I’ve noticed many young developers are using <a target="_blank" href="http://flask.pocoo.org/">Flask</a>. Flask is a highly flexible and elegant Python server. Generally, it is used with a templating framework, <a target="_blank" href="">Jinja2</a>, but if you’d like to load data with a library like <a target="_blank" href="">Redux</a> or <a target="_blank" href="">Uniflow</a>, you can set up your project without one. This guide will walk through setting up a Polymer + Flask project without Jinja2.
+    As mentioned in the <a target="_blank" href="https://wmginsberg.github.io/blog/poly-express">Routing with Polymer and Express article</a>, Polymer only helps build the front end of your application. Your server-side technology is entirely up to you. From attending University hackathons as a sponsor, I’ve noticed many young developers are using <a target="_blank" href="http://flask.pocoo.org/">Flask</a>. Flask is a highly flexible and elegant Python server. Generally, it is used with a templating framework, <a target="_blank" href="http://jinja.pocoo.org/docs/2.9/">Jinja2</a>, but if you’d like to load data with a library like <a target="_blank" href="https://www.youtube.com/watch?v=PahsgJn0sgU">Redux</a> or <a target="_blank" href="https://github.com/google/uniflow-polymer">Uniflow</a>, you can set up your project without one. This guide will walk through setting up a Polymer + Flask project without Jinja2.
 </p>
 
 <p class="note">
@@ -106,7 +106,7 @@ ol {
 </p>
 
 <p>
- You can install Flask via <span class="code_font">pip</span> - follow <a target="_blank" href=""></a>these instructions</a> from the Flask site to get your machine up to date. 
+ You can install Flask via <span class="code_font">pip</span> - follow <a target="_blank" href="http://flask.pocoo.org/docs/0.12/installation/#installation">these instructions</a> from the Flask site to get your machine up to date. 
 </p>
 
 <h2>
@@ -144,14 +144,14 @@ ol {
     $ flask run
 </p>
 <p>
-    ...and now it should be running locally! Visit <a target="_blank" href="">http://127.0.0.1:5000/</a> to see your “Hello, World!” message. If you need to troubleshoot, or want to run an externally visible server, please refer to Flask’s <a target="_blank" href="">Quickstart guide</a>. 
+    ...and now it should be running locally! Visit <a target="_blank" href="http://127.0.0.1:5000/">http://127.0.0.1:5000/</a> to see your “Hello, World!” message. If you need to troubleshoot, or want to run an externally visible server, please refer to Flask’s <a target="_blank" href="http://flask.pocoo.org/docs/0.12/quickstart/#quickstart">Quickstart guide</a>. 
 </p>
 
 <h2>
     III. Bringing in the front end
 </h2>
 <p>
-    For simplicity, I’ll be using Polymer Starter Kit in this article. <a target="_blank" href="">Install the Polymer CLI</a>, so you can run <span class="code_font">polymer init starter-kit</span> within your directory, and a fresh PSK will appear within seconds. 
+    For simplicity, I’ll be using Polymer Starter Kit in this article. <a target="_blank" href="https://www.polymer-project.org/1.0/docs/tools/polymer-cli">Install the Polymer CLI</a>, so you can run <span class="code_font">polymer init starter-kit</span> within your directory, and a fresh PSK will appear within seconds. 
 </p>
 
 <p>
