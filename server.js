@@ -19,6 +19,9 @@ app.get('/', function(req, res){
     res.sendFile("index.html", {root: '.'});
 });
 
+
+// --------------- BLOG POSTS ----------------
+
 app.get('/blog/poly-express', function(req, res){
     res.sendFile("/blog/poly-express.html", {root: '.'});
 });
@@ -27,12 +30,14 @@ app.get('/blog/poly-flask', function(req, res){
     res.sendFile("/blog/poly-flask.html", {root: '.'});
 });
 
+// --------------- EXPERIMENTS ----------------
+
 app.get('/silly-apps', function(req, res){
     res.sendFile("/blog/silly-apps.html", {root: '.'});
 });
 
 
-// Tell the app to listen for requests on port 3001
+// Tell the app to listen for requests on port 8083
 app.listen(port, function () {
   console.log('Example app listening on port '+ port + '!');
 });
