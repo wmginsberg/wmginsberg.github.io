@@ -207,33 +207,72 @@
 	<span class="subh3_bold">Notes:</span> not in-place
   </p>
   <div class="code_snippet">
+  function merge_sort(A):<br />
+  &emsp;n = A.length()<br />
+  &emsp;if n <= 1:<br />
+  &emsp;&emsp;return A<br />
+  &emsp;mid = n/2<br />
+  &emsp;left = mergeSort(A[0 … mid-1])<br />
+  &emsp;right = mergeSort(A[mid .. n-1])<br />
+  &emsp;return merge(left,right)<br />
+<br />
+  function merge(A, B):<br />
+  &emsp;result = []<br />
+  &emsp;aIndex = bIndex = 0<br />
+  &emsp;while aIndex < A.length() and bIndex < B.length():<br />
+  &emsp;&emsp;if A[aIndex] < B[bIndex]:<br />
+  &emsp;&emsp;&emsp;result.append(A[aIndex])<br />
+  &emsp;&emsp;&emsp;aIndex++<br />
+  &emsp;if aIndex < A.length():<br />
+  &emsp;&emsp;result = result + A[aIndex...end]<br />
+  &emsp;if bIndex < B.length():<br />
+  &emsp;&emsp;result = result + B[bIndex...end]<br />
+  &emsp;return result<br />
 	
   </div>
 
   <h3>Selection Sort</h3>
   <p class="subh3">
-	<span class="subh3_bold">Runtime:</span> O(n log n) <br />
-	<span class="subh3_bold">Notes:</span> not in-place
+	<span class="subh3_bold">Runtime:</span> O(n<sup>2</sup>) <br />
+	<span class="subh3_bold">Notes:</span> usually written iteratively and in-place. finds the min and moves it to the first index (then second, third, etc.)
   </p>
   <div class="code_snippet">
-	
+  function selection_sort(A):<br />
+  &emsp;// Input: Unsorted List<br />
+  &emsp;// Output: Sorted List<br />
+  &emsp;n = A.length<br />
+  &emsp;for i = 0 to n-2:<br />
+  &emsp;&emsp;min = argmin(A[i...n-1])<br />
+  &emsp;&emsp;swap A[i] with A[min]<br />
   </div>
 
   <h3>Insertion Sort</h3>
   <p class="subh3">
-	<span class="subh3_bold">Runtime:</span> O(n log n) <br />
-	<span class="subh3_bold">Notes:</span> not in-place
+	<span class="subh3_bold">Runtime:</span> O(n<sup>2</sup>) <br />
+	<span class="subh3_bold">Notes:</span> very fast if already partially sorted
   </p>
   <div class="code_snippet">
-	
+	function insertion_sort(A):<br />
+	&emsp;n = A.length()<br />
+	&emsp;for i = 1 to n-1:<br />
+	&emsp;&emsp;for j = i down to 1:<br />
+	&emsp;&emsp;&emsp;if A[j] < A[j-1]:<br />
+	&emsp;&emsp;&emsp;&emsp;swap A[j] and A[j-1]<br />
+	&emsp;&emsp;&emsp;else:<br />
+	&emsp;&emsp;&emsp;&emsp;break<br />
   </div>
 
   <h3>Reverse</h3>
   <p class="subh3">
-	<span class="subh3_bold">Runtime:</span> O(n log n) <br />
-	<span class="subh3_bold">Notes:</span> not in-place
+	<span class="subh3_bold">Notes:</span> in-place
   </p>
   <div class="code_snippet">
+	function reverse(A):<br />
+	&emsp;n = A.length<br />
+	&emsp;for i = 0 to n/2:<br />
+	&emsp;&emsp;temp = A[i]<br />
+	&emsp;&emsp;A[i] = A[n−1−i]<br />
+	&emsp;&emsp;A[n−1−i] = temp<br />
 	
   </div>
 
