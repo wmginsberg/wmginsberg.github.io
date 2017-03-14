@@ -307,7 +307,7 @@
 	<li>Exactly one simple path connects each pair of vertices in G</li>
   </ul>
 
-  
+
   <h2> Abstract Data Types (ADTs) </h2>
   <table>
   	<tr><th>ADT</th><th>Structure</th><th>Main Methods</th><th>Properties</th></tr> 
@@ -381,6 +381,29 @@
   	<tr><td> Trie </td> <td> Prefix Tree </td><td> insert() <br /> find() </td><td> each node has a dictionary of children </td></tr>
   </table>
 
+  <h2> Algorithms </h2>
+  <table>
+  	<tr><th>Problem</th><th>Algorithm</th><th>Runtime</th><th>Data Structure</th></tr> 
+  	<tr> <td>Sorting</td> <td>Insertion sort</td> <td>n<sup>2</sup></td> <td></td> </tr>
+  	<tr> <td></td> <td>Selection sort</td> <td>worst case: n<sup>2</sup><br>expected: n</td> <td></td> </tr>
+  	<tr> <td></td> <td>Merge sort</td> <td>n log n</td> <td></td> </tr>
+  	<tr> <td></td> <td>Quick sort</td> <td>n log n</td> <td></td> </tr>
+  	<tr> <td></td> <td>Radix sort</td> <td>dn</td> <td></td> </tr>
+  	<tr> <td>Tree Traversals</td> <td>Breadth first</td> <td></td> <td>Queue</td> </tr>
+  	<tr> <td></td> <td>Depth first</td> <td></td> <td>Stack</td> </tr>
+  	<tr> <td></td> <td>Pre-order</td> <td></td> <td></td> </tr>
+  	<tr> <td></td> <td>In-order</td> <td></td> <td></td> </tr>
+  	<tr> <td></td> <td>Post-order</td> <td></td> <td></td> </tr>
+  	<tr> <td></td> <td>Euler tour</td> <td>Left side: pre-order<br>Bottom: in-order<br>Right side: post-order</td> <td></td> </tr>
+  	<tr> <td>Graph stuff</td> <td>BFT</td> <td>V+E</td> <td>Queue</td> </tr>
+  	<tr> <td></td> <td>DFT</td> <td>V+E</td> <td>Stack</td> </tr>
+  	<tr> <td></td> <td>Top Sort</td> <td>V+E</td> <td>Stack, Queue, etc.</td> </tr>
+  	<tr> <td>Shortest Paths</td> <td>Dijkstra</td> <td>|V|<sup>2</sup><br><br>(|V|+|E|)* log|V|</td> <td>Array/Linked list <br><br>PQ/Binary Heap, etc.</td> </tr>
+  	<tr> <td></td> <td>A*</td> <td>(V+E)log(V)</td> <td>PQ/Binary Heap, etc.</td> </tr>
+  	<tr> <td></td> <td>Bellman-Ford</td> <td>VE</td> <td></td> </tr>
+  	<tr> <td>MSTs</td> <td>Prim-Jarnik</td> <td>(V+E)logV</td> <td>PQ</td> </tr>
+  	<tr> <td></td> <td>Kruskals<br>(plus union find)</td> <td>ElogE</td> <td><PQ/td> </tr>
+  </table>
 
 
   </body>
