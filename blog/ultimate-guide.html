@@ -278,11 +278,26 @@
 
   <h3>Quick Sort</h3>
   <p class="subh3">
-	<span class="subh3_bold">Runtime:</span> O(n log n) <br />
-	<span class="subh3_bold">Notes:</span> not in-place
+	<span class="subh3_bold">Runtime:</span> worst case O(n<sup>2</sup>) , expected O(n log n) <br />
+	<span class="subh3_bold">Notes:</span> divide and conquer around a random pivot point. partition the input list into L, E, and G for numbers less than equal to or greater than the pivot point. recursively solve until in order.
   </p>
   <div class="code_snippet">
-	
+	function quick_sort(A):<br />
+	// Input: Unsorted List<br />
+	// Output: Sorted List<br />
+	&emsp;n = A.length<br />
+	&emsp;if n <= 1<br />
+	&emsp;&emsp;return A<br />
+	&emsp;pivot = random element from A<br />
+	&emsp;L, E, G = [ ]<br />
+	&emsp;for each x in A:<br />
+	&emsp;&emsp;if x < pivot:<br />
+	&emsp;&emsp;&emsp;L.append(x)<br />
+	&emsp;&emsp;else if x > pivot:<br />
+	&emsp;&emsp;&emsp;G.append(x)<br />
+	&emsp;&emsp;else:<br />
+	&emsp;&emsp;&emsp;E.append(x)<br />
+	&emsp;return quick_sort(L) + E + quick_sort(G)<br />	
   </div>
 
   <h3>Radix Sort</h3>
@@ -291,7 +306,17 @@
 	<span class="subh3_bold">Notes:</span> not in-place
   </p>
   <div class="code_snippet">
-	
+	function radix_sort(A):<br />
+	// Input: unsorted list<br />
+	// Output: sorted list<br />
+	&emsp;buckets = array of 10 lists<br />
+	&emsp;for place = least to most significant<br />
+	&emsp;&emsp;for number in A<br />
+	&emsp;&emsp;&emsp;d = digit in number at place<br />
+	&emsp;&emsp;&emsp;bucket[d].append(number)<br />
+	&emsp;&emsp;A = concatenate all buckets in order<br />
+	&emsp;&emsp;empty all buckets<br />
+	&emsp;return A<br />
   </div>
 
 <hr>
