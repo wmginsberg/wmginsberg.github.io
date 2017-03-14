@@ -6,12 +6,11 @@
     <style type="text/css">
     table {
 	    border-collapse: collapse;
-	    width: 70%;
 	}
 
 	table, th, td {
 	    border: 1px solid black;
-	    padding: 2px;
+	    padding: 5px;
 	}
 	th {
 		height: 30px;
@@ -326,35 +325,79 @@
 
   <h3>Selection</h3>
   <p class="subh3">
-	<span class="subh3_bold">Runtime:</span> O(n log n) <br />
-	<span class="subh3_bold">Notes:</span> not in-place
+	<span class="subh3_bold">Runtime:</span> <br />
+	expected: O(n) <br />
+	worst case: O(n<sup>2</sup>)
   </p>
   <div class="code_snippet">
-
+	function select(list, k):<br />
+	\\ base case omitted<br />
+	&emsp;pivot = list[rand(0, list.size)]<br />
+	&emsp;L = E = R = []<br />
+	&emsp;for x in list:<br />
+	&emsp;&emsp;if x < pivot: L.append(x)<br />
+	&emsp;&emsp;if x = pivot: E.append(x)<br />
+	&emsp;&emsp;if x > pivot: R.append(x)<br />
+	&emsp;if k <= L.size:<br />
+	&emsp;&emsp;return select(L,k)<br />
+	&emsp;else if k > L.size and k <= (L.size + E.size):<br />
+	&emsp;&emsp;return pivot<br />
+	&emsp;else:<br />
+	&emsp;&emsp;return select(R,k)<br />
   </div>
 
   <h3>Median of Medians</h3>
   <p class="subh3">
-	<span class="subh3_bold">Runtime:</span> O(n log n) <br />
-	<span class="subh3_bold">Notes:</span> not in-place
+	<span class="subh3_bold">Runtime:</span> O(n) <br />
   </p>
   <div class="code_snippet">
-
+	function momSelect(list, k):<br />
+	//base cases omitted<br />
+	&emsp;miniLists = divide list into n/5 lists of 5<br />
+	&emsp;medians = []<br />
+	&emsp;for miniList in miniLists:<br />
+	&emsp;&emsp;sort(miniList) // O(1) because list is always of length 5<br />
+	&emsp;&emsp;medians.append(miniList[2])<br />
+	&emsp;pivot = momSelect(medians, medians.size()/2)<br />
+	<br />
+	&emsp;L = E = R = []<br />
+	&emsp;for x in list:<br />
+	&emsp;&emsp;if x < pivot: L.append(x)<br />
+	&emsp;&emsp;if x = pivot: E.append(x)<br />
+	&emsp;&emsp;if x > pivot: R.append(x)<br />
+	&emsp;if k <= L.size:<br />
+	&emsp;&emsp;return select(L,k)<br />
+	&emsp;else if k > L.size and k <= (L.size + E.size):<br />
+	&emsp;&emsp;return pivot<br />
+	&emsp;else:<br />
+	&emsp;return select(R,k)<br />
   </div>
 
   <h3>Binary Search</h3>
   <p class="subh3">
-	<span class="subh3_bold">Runtime:</span> O(n log n) <br />
-	<span class="subh3_bold">Notes:</span> not in-place
+	<span class="subh3_bold">Runtime:</span> O(log n) <br />
+	<span class="subh3_bold">Notes:</span> <br />
+	Input: A – a sorted array, x – the item to find <br />
+	Output: true if x is in the array <br />
   </p>
   <div class="code_snippet">
-
+	function binarySearch(A, x):<br />
+	&emsp;lo = 0<br />
+	&emsp;hi = A.size - 1<br />
+	&emsp;while lo < hi:<br />
+	&emsp;&emsp;mid = (lo + hi) / 2<br />
+	&emsp;&emsp;if A[mid] == x:<br />
+	&emsp;&emsp;&emsp;return true<br />
+	&emsp;&emsp;if A[mid] < x:<br />
+	&emsp;&emsp;&emsp;lo = mid + 1<br />
+	&emsp;&emsp;if A[mid] > x:<br />
+	&emsp;&emsp;&emsp;hi = mid – 1<br />
+	&emsp;return A[lo] == x<br />
   </div>
 
   <h3>Angular Graham Scan</h3>
   <p class="subh3">
 	<span class="subh3_bold">Runtime:</span> O(n log n) <br />
-	<span class="subh3_bold">Notes:</span> for a convex hull
   </p>
 
 <hr>
@@ -368,25 +411,58 @@
 	<span class="subh3_bold">Notes:</span> not in-place
   </p>
   <div class="code_snippet">
-
+	function bft(root):<br />
+	// Input: root node of tree<br />
+	// Output: None<br />
+	&emsp;Q = new Queue()<br />
+	&emsp;enqueue root<br />
+	&emsp;while Q is not empty:<br />
+	&emsp;&emsp;node = Q.dequeue()<br />
+	&emsp;&emsp;visit(node)<br />
+	&emsp;&emsp;enqueue node’s left &amp; right children<br />
   </div>
 
   <h3>Depth-First Traversal</h3>
-  <p class="subh3">
-	<span class="subh3_bold">Runtime:</span> O(n log n) <br />
-	<span class="subh3_bold">Notes:</span> not in-place
-  </p>
   <div class="code_snippet">
-
+	function dft(root):<br />
+	// Input: root node of tree<br />
+	// Output: None<br />
+	&emsp;S = new Stack()<br />
+	&emsp;push root onto S<br />
+	&emsp;while S is not empty:<br />
+	&emsp;&emsp;node = S.pop()<br />
+	&emsp;&emsp;visit(node)<br />
+	&emsp;&emsp;push node’s left &amp; right children<br />
   </div>
 
   <h3>Recursive Breadth-First Traversal</h3>
-  <p class="subh3">
-	<span class="subh3_bold">Runtime:</span> O(n log n) <br />
-	<span class="subh3_bold">Notes:</span> not in-place
-  </p>
   <div class="code_snippet">
-
+	function preorder(node):<br />
+	// Input: root node of tree<br />
+	// Output: None<br />
+	&emsp;visit(node)<br />
+	&emsp;if node has left child<br />
+	&emsp;&emsp;preorder(node.left)<br />
+	&emsp;if node has right child<br />
+	&emsp;&emsp;preorder(node.right)<br />
+	<br />
+	function inorder(node):<br />
+	// Input: root node of tree<br />
+	// Output: None<br />
+	&emsp;if node has left child<br />
+	&emsp;&emsp;preorder(node.left)<br />
+	&emsp;visit(node)<br />
+	&emsp;if node has right child<br />
+	&emsp;&emsp;preorder(node.right)<br />
+	<br />
+	function postorder(node):<br />
+	// Input: root node of tree<br />
+	// Output: None<br />
+	&emsp;if node has left child<br />
+	&emsp;&emsp;postorder(node.left)<br />
+	&emsp;if node has right child<br />
+	&emsp;&emsp;postorder(node.right)<br />
+	&emsp;visit(node)<br />
   </div>
 
 <hr>
