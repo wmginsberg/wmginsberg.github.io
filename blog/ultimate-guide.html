@@ -2,581 +2,762 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Tech Interview Cheatsheet</title>
+    <title>Tech Interview 101</title>
     <style type="text/css">
-    table {
-	    border-collapse: collapse;
-	}
+      div, body {
+        display: block;
+      }
+      body {
+        background-color: var(--color-lightest-grey);
+        position: relative;
+        top: 75px;
+        font-weight: 100;
+        padding: 20px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      }
+      h1 {
+        font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
+        background-color: var(--color-dark-turq);
+        color: var(--color-lightest-grey);
+        padding-left: 20px;
+        font-weight: 300;
+      }
+      p, span, table {
+        font-family: Arial, sans-serif;
+        font-weight: 300;
+      }
+      table {
+          border-collapse: collapse;
+      }
 
-	table, th, td {
-	    border: 1px solid black;
-	    padding: 5px;
-	}
-	th {
-		height: 30px;
-		background-color: #eee;
-	}
-	.code_snippet {
-		font-family: monospace;
-	}
-	.code_snippet:hover {
-		background-color: lightblue;
-	}
-	.subh3_bold {
-		font-weight: 700;
-	}
+      table, th, td {
+          border: 1px solid black;
+          padding: 5px;
+      }
+      th {
+        height: 30px;
+        background-color: #eee;
+      }
+      .code_snippet {
+        font-family: monospace;
+      }
+      .code_snippet:hover {
+        background-color: lightblue;
+      }
+      
+      .subh3_bold {
+        font-weight: 700;
+      }
+      html {
+        --color-dark-turq: #20C5C0;
+        --color-light-turq: #A5DDDF;
+        --color-dark-grey: #5A636B;
+        --color-light-grey: #D6D6D7;
+        --color-lightest-grey: #F9FAFC;
+        --color-tan: #B8C0C5;
+        --color-peach: #C7AEA3;
+        --color-shadow: #7f8993;
+      }
+
+      .topnav {
+          background-color: var(--color-dark-turq);
+          width: 100%;
+          overflow: hidden;
+          position: fixed;
+          top: 0px;
+          left: 0px;
+          height: 75px;
+      }
+      .infocard {
+        background-color: var(--color-lightest-grey);
+        border-radius: 2px;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+        margin: 40px 0;
+        color: var(--color-dark-grey);
+        font-weight: 100;
+        padding: 20px;
+      }
+      h2 {
+        font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
+        font-weight: 200;
+      }
+
+      h3 {       
+        margin: 0px;
+        color: var(--color-dark-turq);
+        font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
+        font-weight: 200;
+      }
+      pre {
+        margin: 0;
+      }
+      code {
+        display: none;
+        padding-left: 10px;
+        font-size: 12px;
+        margin-top: 10px;
+      }
+      button {
+        background-color:#20c5bf;
+        display:inline-block;
+        cursor:pointer;
+        color: white;
+        font-family:Arial;
+        font-size:14px;
+        font-weight:200;
+        padding:7px 15px;
+        text-decoration:none;
+        margin: 5px;
+        outline:none;
+        border: 1px solid var(--color-dark-turq);
+      }
+      button:hover {
+        color: #20c5bf;
+        background: var(--color-lightest-grey);
+      }
+      button:active {
+        position:relative;
+        top:1px;
+
+      }
+
     </style>
   </head>
-  <body>
-  
-  <h1> Tech Interview Cheatsheet </h1>
+  <div class="topnav"> 
+    <h1> Tech Interview 101 </h1>
+  </div>
 
-  <h2> Shortest Path Algorithms </h2>
+  <body>
+ 
+
+
+  <!-- <div class="infocard"> -->
+    <h2 id="big-o-cheat-sheet"> Big O Cheat Sheet </h2>
+    <span class="subh2_it">Note: This is not affiliated with my guide, but it is incredibly helpful. </span>
+    <p class="sub_h3"><a href="http://bigocheatsheet.com/">http://bigocheatsheet.com/</a></p>
+  <!-- </div> -->
+
+  <h2 id="shortest-path"> Shortest Path Algorithms </h2>
   <p class="subh2">Find a path from source --> end</p>
 
-  <h3> Dijkstra's Algorithm </h3>
-  <p class="subh3">
-  	<span class="subh3_bold">Runtime:</span> O(|V|)<sup>2</sup>or O((|V|+|E|) log |V|) <br />
-  	Depends on implementation: the former using an array/linked this, and the latter using a binary heap. 
-  	<br />
-  	<span class="subh3_bold">Notes:</span> Cannot process negative edge weights.
-  </p>
+  <div class="infocard">
+    <h3 id="dijkstras"> Dijkstra's Algorithm </h3>
+    <p class="subh3">
+      <span class="subh3_bold">Runtime:</span> O(|V|)<sup>2</sup> or O((|V|+|E|) log |V|)
+      Depends on implementation: the former using an array/linked this, and the latter using a binary heap. <br />
+      
+      <span class="subh3_bold">Notes:</span> Cannot process negative edge weights.
+    </p>
 
-  <div class="code_snippet">
-	function dijkstra(G,s):<br />
-    &emsp;dist(v in V) = infinity<br />
-    &emsp;prev(v in V) = null<br />
-    &emsp;dist(s) = 0<br />
-    &emsp;PQ = PriorityQueue(V)<br />
-    &emsp;tree = []<br />
-    &emsp;while PQ is not empty:<br />
-    &emsp;&emsp;u = PQ.removeMin()<br />
-    &emsp;&emsp;&emsp;for all edges (u,v):<br />
-    &emsp;&emsp;&emsp;&emsp;if dist(v) > dist(u) + cost(u,v):<br />
-    &emsp;&emsp;&emsp;&emsp;&emsp;dist(v) = dist(u) + cost(u,v)<br />
-    &emsp;&emsp;&emsp;&emsp;&emsp;prev(v) = u<br />
-    &emsp;&emsp;&emsp;&emsp;&emsp;PQ.replaceKey(v, dist(v))<br />
-    &emsp;for v in V:<br />
-    &emsp;&emsp;if v.prev is not null:<br />
-    &emsp;&emsp;&emsp;tree.append(connecting_edge(v,v.prev))<br />
-    &emsp;return tree<br />
+    <button id="dijkstra_toggle" onclick="toggleVisibility('dijkstra')">Show Pseudocode</button>
+    <pre><code id="dijkstra_code">function dijkstra(G,s):
+  dist(v in V) = infinity
+  prev(v in V) = null
+  dist(s) = 0
+  PQ = PriorityQueue(V)
+  tree = []
+  while PQ is not empty:
+      u = PQ.removeMin()
+          for all edges (u,v):
+              if dist(v) > dist(u) + cost(u,v):
+                  dist(v) = dist(u) + cost(u,v)
+                  prev(v) = u
+                  PQ.replaceKey(v, dist(v))
+  for v in V:
+      if v.prev is not null:
+          tree.append(connecting_edge(v,v.prev))
+  return tree
+    </code></pre>
   </div>
 
-  <h3>Bellman-Ford Algorithm</h3>
-  <p class="subh3">
-	<span class="subh3_bold">Runtime:</span> O(|V|*|E|) <br />
-	<span class="subh3_bold">Notes:</span> Relaxes |E| edges, |V|-1 times. Can process negative edge weights.
-  </p>
-  <div class="code_snippet">
-	function BellmanFord(V,E,src):<br />
-	&emsp;for each vertex v in vertices:<br />
-	&emsp;&emsp;v.dist = infinity<br />
-	&emsp;&emsp;if v = src:<br />
-	&emsp;&emsp;&emsp;v.dist = 0<br />
-	&emsp;&emsp;&emsp;v.prev = null<br />
-	&emsp;repeat |V|-1 times:<br />
-	&emsp;&emsp;for each edge (u,v) in E:<br />
-	&emsp;&emsp;&emsp;if u.dist + (u,v).weight < v.dist:<br />
-	&emsp;&emsp;&emsp;&emsp;v.dist = u.dist + (u,v).weight<br />
-	&emsp;&emsp;&emsp;&emsp;v.prev = u<br />
-	&emsp;// checking for negative cycles<br />
-	&emsp;for each edge (u,v) in E:<br />
-	&emsp;&emsp;if u.dist + (u,v).weight < v.dist:<br />
-	&emsp;&emsp;&emsp;throw new NegativeCycleException()<br />
-	&emsp;// build tree<br />
-	&emsp;for v in V:<br />
-	&emsp;&emsp;if v.prev is not null:<br />
-	&emsp;&emsp;&emsp;tree.append(connecting_edge(v, v.prev))<br />
+  <div class="infocard">
+    <h3 id="bellman-ford">Bellman-Ford Algorithm</h3>
+    <p class="subh3">
+    <span class="subh3_bold">Runtime:</span> O(|V|*|E|) <br />
+    <span class="subh3_bold">Notes:</span> Relaxes |E| edges, |V|-1 times. Can process negative edge weights.
+    </p>
+    <button id="bellman_toggle" onclick="toggleVisibility('bellman')">Show Pseudocode</button>
+    <pre><code id="bellman_code">
+    function BellmanFord(V,E,src):
+        for each vertex v in vertices:
+            v.dist = infinity
+            if v = src:
+                v.dist = 0
+                v.prev = null
+        repeat |V|-1 times:
+            for each edge (u,v) in E:
+                if u.dist + (u,v).weight < v.dist:
+                    v.dist = u.dist + (u,v).weight
+                    v.prev = u
+        // checking for negative cycles
+        for each edge (u,v) in E:
+            if u.dist + (u,v).weight < v.dist:
+                throw new NegativeCycleException()
+        // build tree
+        for v in V:
+            if v.prev is not null:
+                tree.append(connecting_edge(v, v.prev))
+    </code></pre>
   </div>
 
-  <h3>Top Sort</h3>
-  <p class="subh3">
-	<span class="subh3_bold">Runtime:</span> O(|V|+|E|)
-  </p>
-  <div class="code_snippet">
-	function TopSort(G):<br />
-	&emsp;S = Stack()<br />
-	&emsp;L = []<br />
-	&emsp;for each vertex in G:<br />
-	&emsp;&emsp;if vertex has no incident edges:<br />
-	&emsp;&emsp;&emsp;S.push(vertex)<br />
-	&emsp;while S is not empty:<br />
-	&emsp;&emsp;v = S.pop()<br />
-	&emsp;&emsp;L.append(v)<br />
-	&emsp;&emsp;for each outgoing edge e from v:<br />
-	&emsp;&emsp;&emsp;w = e.destination<br />
-	&emsp;&emsp;&emsp;delete e<br />
-	&emsp;&emsp;&emsp;if w has no incident edges:<br />
-	&emsp;&emsp;&emsp;&emsp;S.push(w)<br />
-	&emsp;return L<br />
+  <div class="infocard">
+    <h3 id="top-sort">Top Sort</h3>
+    <p class="subh3">
+    <span class="subh3_bold">Runtime:</span> O(|V|+|E|)<br />
+    </p>
+    <button id="topsort_toggle" onclick="toggleVisibility('topsort')">Show Pseudocode</button>
+    <pre><code id="topsort_code">function TopSort(G):
+    S = Stack()
+    L = []
+    for each vertex in G:
+        if vertex has no incident edges:
+            S.push(vertex)
+    while S is not empty:
+        v = S.pop()
+        L.append(v)
+        for each outgoing edge e from v:
+            w = e.destination
+            delete e
+            if w has no incident edges:
+                S.push(w)
+    return L
+    </code></pre>  
   </div>  
 
-<hr>
 
-  <h2> Minimum Spanning Tree Algorithms </h2>
+
+  <h2 id="minimum-spanning"> Minimum Spanning Tree Algorithms </h2>
+  
   <p class="subh2">Find the MSTree of a graph, or MSForest of multiple graphs</p>
 
-  <h3>Prim-Jarnik Algorithm</h3>
-  <p class="subh3">
-	<span class="subh3_bold">Runtime:</span> O((|V|+|E|) log|V|) <br />
-	<span class="subh3_bold">Notes:</span> Best to prove correctness by induction. This is a greedy algorithm.
-  </p>
-  <div class="code_snippet">
-	function prim(G):<br />
-	&emsp;for all vertices v in G:<br />
-	&emsp;&emsp;v.cost = infinity<br />
-	&emsp;&emsp;v.prev = null<br />
-	&emsp;source = a random v in V<br />
-	&emsp;source.cost = 0<br />
-	&emsp;MST = []<br />
-	&emsp;PQ = PriorityQueue(V)<br />
-	&emsp;while PQ is not empty:<br />
-	&emsp;&emsp;v = PQ>removeMin()<br />
-	&emsp;&emsp;if v.prev != null:<br />
-	&emsp;&emsp;&emsp;MST.append((v,v.prev))<br />
-	&emsp;&emsp;for all incident edges (v,u) of v:<br />
-	&emsp;&emsp;&emsp;if u.cost > (v,u).weight<br />
-	&emsp;&emsp;&emsp;&emsp;u.cost = (v,u).weight<br />
-	&emsp;&emsp;&emsp;&emsp;u.prev = v <br />
-	&emsp;&emsp;&emsp;PQ.replaceKey(u,u.cost)<br />
-	&emsp;return MST<br />
+  <div class="infocard">
+    <h3 id="prim-jarnik">Prim-Jarnik Algorithm</h3>
+    <p class="subh3">
+    <span class="subh3_bold">Runtime:</span> O((|V|+|E|) log|V|) <br />
+    <span class="subh3_bold">Notes:</span> Best to prove correctness by induction. This is a greedy algorithm.
+    </p>
+    <button id="prim_toggle" onclick="toggleVisibility('prim')">Show Pseudocode</button>
+    <pre><code id="prim_code">
+    function prim(G):
+        for all vertices v in G:
+            v.cost = infinity
+            v.prev = null
+        source = a random v in V
+        source.cost = 0
+        MST = []
+        PQ = PriorityQueue(V)
+        while PQ is not empty:
+            v = PQ>removeMin()
+            if v.prev != null:
+                MST.append((v,v.prev))
+            for all incident edges (v,u) of v:
+                if u.cost > (v,u).weight
+                    u.cost = (v,u).weight
+                    u.prev = v 
+                PQ.replaceKey(u,u.cost)
+        return MST
+    </code></pre>
+  </div>  
+
+  <div class="infocard">
+    <h3 id="kruskals">Kruskal's Algorithm</h3>
+    <p class="subh3">
+    <span class="subh3_bold">Runtime:</span> O(|E|log|E|) 
+    Thanks to union find/path compression this is the runtime. Without union find/recursive path compression, the runtime is O(|V|<sup>3</sup>) <br />
+    <span class="subh3_bold">Notes:</span> Sorts all edges of the graph by weight in ascending order, and if its addition doesn’t create a cycle, add it to the MST. Detect cycles with “clouds”.
+    </p>
+    <button id="kruskal_toggle" onclick="toggleVisibility('kruskal')">Show Pseudocode</button>
+    <pre><code id="kruskal_code">
+    function kruskal(G):
+        for vertices v in G:
+            v.parent = v
+            v.rank = 0
+        MST = []
+        for all edges(u,v) in G sorted by weight:
+            if u and v are not in same cloud:
+            if v.prev != null:
+                MST.append((u,v))
+                this.mergeClouds(u.parent, v.parent)
+                this.pathCompress(v)
+        return MST
+    </code></pre>
+
+    <p class="subh3">
+      <span class="subh3_bold">Helper Functions</span> <br />
+    <span class="subh3_bold">Runtime:</span> Amortized O(1)
+    </p>
+
+    <button id="merge_toggle" onclick="toggleVisibility('merge')">Show Pseudocode</button>
+    <pre><code id="merge_code">
+    function mergeClouds(p1, p2): // union
+        if p1.rank > p2.rank:
+            p2.parent = p1
+        else if p1.rank < p2.rank:
+            p1.parent = p2
+        else:
+            p2.parent = p1
+            p1.rank++
+    
+    
+    function pathCompress(v): // find
+        if v != v.parent:
+            v.parent = pathCompress(v.parent)
+        return v.parent
+    </code></pre>
   </div>
 
-  <h3>Kruskal's Algorithm</h3>
-  <p class="subh3">
-	<span class="subh3_bold">Runtime:</span> O(|E|log|E|) <br />
-	Thanks to union find/path compression this is the runtime. Without union find/recursive path compression, the runtime is O(|V|<sup>3</sup>) <br />
-	<span class="subh3_bold">Notes:</span> Sorts all edges of the graph by weight in ascending order, and if its addition doesn’t create a cycle, add it to the MST. Detect cycles with “clouds”.
-  </p>
-  <div class="code_snippet">
-	function kruskal(G):<br />
-	&emsp;for vertices v in G:<br />
-	&emsp;&emsp;v.parent = v<br />
-	&emsp;&emsp;v.rank = 0<br />
-	&emsp;MST = []<br />
-	&emsp;for all edges(u,v) in G sorted by weight:<br />
-	&emsp;&emsp;if u and v are not in same cloud:<br />
-	&emsp;&emsp;if v.prev != null:<br />
-	&emsp;&emsp;&emsp;MST.append((u,v))<br />
-	&emsp;&emsp;&emsp;this.mergeClouds(u.parent, v.parent)<br />
-	&emsp;&emsp;&emsp;this.pathCompress(v)<br />
-	&emsp;return MST<br />
+
+
+    <h2 id="sorting"> Sorting Algorithms </h2>
+    <p class="subh2">Sort a list</p>
+
+  <div class="infocard">
+    <h3> Runtime Overview </h3>
+
+    <table>
+    <tr><th>Algorithm</th><th>Time</th><th>Notes</th></tr>
+    <tr><td>Selection sort</td><td>O(n<sup>2</sup>)</td><td>in place<br>slow (good for small inputs)</td></tr>
+    <tr><td>Insertion sort</td><td>O(n<sup>2</sup>)</td><td>in place<br>slow (good for small inputs)</td></tr>
+    <tr><td>Merge sort</td><td>O(n log n)</td><td>fast (good for large inputs)</td></tr>
+    <tr><td>Quick sort</td><td>O(n log n)<br>expected</td><td>randomized<br>fastest (good for large inputs)</td></tr>
+    <tr><td>Radix sort</td><td>O(nd)</td><td>d is number of digits in largest number<br>basically linear when d is small</td></tr>
+    </table>
+    <p> Mnemonic: SQuIRM (n<sup>2</sup>, n log n, n<sup>2</sup>,nd, n log n) </p>
+
   </div>
 
-  <p class="subh3">
-  	<span class="subh3_bold">Helper Functions</span><br />
-	<span class="subh3_bold">Runtime:</span> Amortized O(1)
-  </p>
+  <div class="infocard">
+    <h3 id="merge-sort">Merge Sort</h3>
+    <p class="subh3">
+    <span class="subh3_bold">Runtime:</span> O(n log n) <br />
+    <span class="subh3_bold">Notes:</span> not in-place
+    </p>
+    <button id="mergesort_toggle" onclick="toggleVisibility('mergesort')">Show Pseudocode</button>
+    <pre><code id="mergesort_code">
+    function merge_sort(A):
+        n = A.length()
+        if n <= 1:
+            return A
+        mid = n/2
+        left = mergeSort(A[0 … mid-1])
+        right = mergeSort(A[mid .. n-1])
+        return merge(left,right)
 
-  <div class="code_snippet">
-	function mergeClouds(p1, p2): // union<br />
-	&emsp;if p1.rank > p2.rank:<br />
-	&emsp;&emsp;p2.parent = p1<br />
-	&emsp;else if p1.rank < p2.rank:<br />
-	&emsp;&emsp;p1.parent = p2<br />
-	&emsp;else:<br />
-	&emsp;&emsp;p2.parent = p1<br />
-	&emsp;&emsp;p1.rank++<br />
-	<br />
-	<br />
-	function pathCompress(v): // find<br />
-	&emsp;if v != v.parent:<br />
-	&emsp;&emsp;v.parent = pathCompress(v.parent)<br />
-	&emsp;return v.parent<br />
+    function merge(A, B):
+        result = []
+        aIndex = bIndex = 0
+        while aIndex < A.length() and bIndex < B.length():
+            if A[aIndex] < B[bIndex]:
+                result.append(A[aIndex])
+                aIndex++
+        if aIndex < A.length():
+            result = result + A[aIndex...end]
+        if bIndex < B.length():
+            result = result + B[bIndex...end]
+        return result
+    
+    </code></pre>
   </div>
 
-<hr>
+  <div class="infocard">
+    <h3 id="selection-sort">Selection Sort</h3>
+    <p class="subh3">
+    <span class="subh3_bold">Runtime:</span> O(n<sup>2</sup>) <br />
+    <span class="subh3_bold">Notes:</span> usually written iteratively and in-place. finds the min and moves it to the first index (then second, third, etc.)
+    </p>
+    <button id="selection_toggle" onclick="toggleVisibility('selection')">Show Pseudocode</button>
+    <pre><code id="selection_code">
+    function selection_sort(A):
+        // Input: Unsorted List
+        // Output: Sorted List
+        n = A.length
+        for i = 0 to n-2:
+            min = argmin(A[i...n-1])
+            swap A[i] with A[min]
+    </code></pre>
 
-  <h2> Sorting Algorithms </h2>
-  <p class="subh2">Sort a list</p>
+  </div>
+  <div class="infocard">
 
-  <table>
-  <tr><th>Algorithm</th><th>Time</th><th>Notes</th></tr>
-  <tr><td>Selection sort</td><td>O(n<sup>2</sup>)</td><td>in place<br>slow (good for small inputs)</td></tr>
-  <tr><td>Insertion sort</td><td>O(n<sup>2</sup>)</td><td>in place<br>slow (good for small inputs)</td></tr>
-  <tr><td>Merge sort</td><td>O(n log n)</td><td>fast (good for large inputs)</td></tr>
-  <tr><td>Quick sort</td><td>O(n log n)<br>expected</td><td>randomized<br>fastest (good for large inputs)</td></tr>
-  <tr><td>Radix sort</td><td>O(nd)</td><td>d is number of digits in largest number<br>basically linear when d is small</td></tr>
-  </table>
-  <p> Mnemonic: SQuIRM (n<sup>2</sup>, n log n, n<sup>2</sup>,nd, n log n)
+    <h3 id="insertion-sort">Insertion Sort</h3>
+    <p class="subh3">
+    <span class="subh3_bold">Runtime:</span> O(n<sup>2</sup>) <br />
+    <span class="subh3_bold">Notes:</span> very fast if already partially sorted
+    </p>
+    <button id="insert_toggle" onclick="toggleVisibility('insert')">Show Pseudocode</button>
+    <pre><code id="insert_code">
+    function insertion_sort(A):
+        n = A.length()
+        for i = 1 to n-1:
+            for j = i down to 1:
+                if A[j] < A[j-1]:
+                    swap A[j] and A[j-1]
+                else:
+                    break
+    </code></pre>
 
-  <h3>Merge Sort</h3>
-  <p class="subh3">
-	<span class="subh3_bold">Runtime:</span> O(n log n) <br />
-	<span class="subh3_bold">Notes:</span> not in-place
-  </p>
-  <div class="code_snippet">
-  function merge_sort(A):<br />
-  &emsp;n = A.length()<br />
-  &emsp;if n <= 1:<br />
-  &emsp;&emsp;return A<br />
-  &emsp;mid = n/2<br />
-  &emsp;left = mergeSort(A[0 … mid-1])<br />
-  &emsp;right = mergeSort(A[mid .. n-1])<br />
-  &emsp;return merge(left,right)<br />
-<br />
-  function merge(A, B):<br />
-  &emsp;result = []<br />
-  &emsp;aIndex = bIndex = 0<br />
-  &emsp;while aIndex < A.length() and bIndex < B.length():<br />
-  &emsp;&emsp;if A[aIndex] < B[bIndex]:<br />
-  &emsp;&emsp;&emsp;result.append(A[aIndex])<br />
-  &emsp;&emsp;&emsp;aIndex++<br />
-  &emsp;if aIndex < A.length():<br />
-  &emsp;&emsp;result = result + A[aIndex...end]<br />
-  &emsp;if bIndex < B.length():<br />
-  &emsp;&emsp;result = result + B[bIndex...end]<br />
-  &emsp;return result<br />
-	
+  </div>
+  <div class="infocard">
+    <h3 id="reverse">Reverse</h3>
+    <p class="subh3">
+    <span class="subh3_bold">Notes:</span> in-place
+    </p>
+    <button id="reverse_toggle" onclick="toggleVisibility('reverse')">Show Pseudocode</button>
+    <pre><code id="reverse_code">
+    function reverse(A):
+        n = A.length
+        for i = 0 to n/2:
+            temp = A[i]
+            A[i] = A[n−1−i]
+            A[n−1−i] = temp
+    
+    </code></pre>
+
   </div>
 
-  <h3>Selection Sort</h3>
-  <p class="subh3">
-	<span class="subh3_bold">Runtime:</span> O(n<sup>2</sup>) <br />
-	<span class="subh3_bold">Notes:</span> usually written iteratively and in-place. finds the min and moves it to the first index (then second, third, etc.)
-  </p>
-  <div class="code_snippet">
-  function selection_sort(A):<br />
-  &emsp;// Input: Unsorted List<br />
-  &emsp;// Output: Sorted List<br />
-  &emsp;n = A.length<br />
-  &emsp;for i = 0 to n-2:<br />
-  &emsp;&emsp;min = argmin(A[i...n-1])<br />
-  &emsp;&emsp;swap A[i] with A[min]<br />
+  <div class="infocard">
+    <h3 id="quick-sort">Quick Sort</h3>
+    <p class="subh3">
+    <span class="subh3_bold">Runtime:</span> worst case O(n<sup>2</sup>) , expected O(n log n) <br />
+    <span class="subh3_bold">Notes:</span> divide and conquer around a random pivot point. partition the input list into L, E, and G for numbers less than equal to or greater than the pivot point. recursively solve until in order.
+    </p>
+    <button id="quick_toggle" onclick="toggleVisibility('quick')">Show Pseudocode</button>
+    <pre><code id="quick_code">
+    function quick_sort(A):
+    // Input: Unsorted List
+    // Output: Sorted List
+        n = A.length
+        if n <= 1
+            return A
+        pivot = random element from A
+        L, E, G = [ ]
+        for each x in A:
+            if x < pivot:
+                L.append(x)
+            else if x > pivot:
+                G.append(x)
+            else:
+                E.append(x)
+        return quick_sort(L) + E + quick_sort(G)  
+    </code></pre>
+
+  </div>
+  <div class="infocard">
+    <h3 id="radix-sort">Radix Sort</h3>
+    <p class="subh3">
+    <span class="subh3_bold">Runtime:</span> O(n log n) <br />
+    <span class="subh3_bold">Notes:</span> not in-place
+    </p>
+    <button id="radix_toggle" onclick="toggleVisibility('radix')">Show Pseudocode</button>
+    <pre><code id="radix_code">function radix_sort(A):
+// Input: unsorted list
+// Output: sorted list
+    buckets = array of 10 lists
+    for place = least to most significant
+        for number in A
+            d = digit in number at place
+            bucket[d].append(number)
+        A = concatenate all buckets in order
+        empty all buckets
+    return A
+    </code></pre>
+
   </div>
 
-  <h3>Insertion Sort</h3>
-  <p class="subh3">
-	<span class="subh3_bold">Runtime:</span> O(n<sup>2</sup>) <br />
-	<span class="subh3_bold">Notes:</span> very fast if already partially sorted
-  </p>
-  <div class="code_snippet">
-	function insertion_sort(A):<br />
-	&emsp;n = A.length()<br />
-	&emsp;for i = 1 to n-1:<br />
-	&emsp;&emsp;for j = i down to 1:<br />
-	&emsp;&emsp;&emsp;if A[j] < A[j-1]:<br />
-	&emsp;&emsp;&emsp;&emsp;swap A[j] and A[j-1]<br />
-	&emsp;&emsp;&emsp;else:<br />
-	&emsp;&emsp;&emsp;&emsp;break<br />
-  </div>
 
-  <h3>Reverse</h3>
-  <p class="subh3">
-	<span class="subh3_bold">Notes:</span> in-place
-  </p>
-  <div class="code_snippet">
-	function reverse(A):<br />
-	&emsp;n = A.length<br />
-	&emsp;for i = 0 to n/2:<br />
-	&emsp;&emsp;temp = A[i]<br />
-	&emsp;&emsp;A[i] = A[n−1−i]<br />
-	&emsp;&emsp;A[n−1−i] = temp<br />
-	
-  </div>
-
-  <h3>Quick Sort</h3>
-  <p class="subh3">
-	<span class="subh3_bold">Runtime:</span> worst case O(n<sup>2</sup>) , expected O(n log n) <br />
-	<span class="subh3_bold">Notes:</span> divide and conquer around a random pivot point. partition the input list into L, E, and G for numbers less than equal to or greater than the pivot point. recursively solve until in order.
-  </p>
-  <div class="code_snippet">
-	function quick_sort(A):<br />
-	// Input: Unsorted List<br />
-	// Output: Sorted List<br />
-	&emsp;n = A.length<br />
-	&emsp;if n <= 1<br />
-	&emsp;&emsp;return A<br />
-	&emsp;pivot = random element from A<br />
-	&emsp;L, E, G = [ ]<br />
-	&emsp;for each x in A:<br />
-	&emsp;&emsp;if x < pivot:<br />
-	&emsp;&emsp;&emsp;L.append(x)<br />
-	&emsp;&emsp;else if x > pivot:<br />
-	&emsp;&emsp;&emsp;G.append(x)<br />
-	&emsp;&emsp;else:<br />
-	&emsp;&emsp;&emsp;E.append(x)<br />
-	&emsp;return quick_sort(L) + E + quick_sort(G)<br />	
-  </div>
-
-  <h3>Radix Sort</h3>
-  <p class="subh3">
-	<span class="subh3_bold">Runtime:</span> O(n log n) <br />
-	<span class="subh3_bold">Notes:</span> not in-place
-  </p>
-  <div class="code_snippet">
-	function radix_sort(A):<br />
-	// Input: unsorted list<br />
-	// Output: sorted list<br />
-	&emsp;buckets = array of 10 lists<br />
-	&emsp;for place = least to most significant<br />
-	&emsp;&emsp;for number in A<br />
-	&emsp;&emsp;&emsp;d = digit in number at place<br />
-	&emsp;&emsp;&emsp;bucket[d].append(number)<br />
-	&emsp;&emsp;A = concatenate all buckets in order<br />
-	&emsp;&emsp;empty all buckets<br />
-	&emsp;return A<br />
-  </div>
-
-<hr>
-
-  <h2> Selection &amp; Search Algorithms </h2>
+  <h2 id="selection-and-search"> Selection &amp; Search Algorithms </h2>
   <p class="subh2">Algorithms to find things</p>
 
-  <h3>Selection</h3>
-  <p class="subh3">
-	<span class="subh3_bold">Runtime:</span> <br />
-	expected: O(n) <br />
-	worst case: O(n<sup>2</sup>)
-  </p>
-  <div class="code_snippet">
-	function select(list, k):<br />
-	\\ base case omitted<br />
-	&emsp;pivot = list[rand(0, list.size)]<br />
-	&emsp;L = E = R = []<br />
-	&emsp;for x in list:<br />
-	&emsp;&emsp;if x < pivot: L.append(x)<br />
-	&emsp;&emsp;if x = pivot: E.append(x)<br />
-	&emsp;&emsp;if x > pivot: R.append(x)<br />
-	&emsp;if k <= L.size:<br />
-	&emsp;&emsp;return select(L,k)<br />
-	&emsp;else if k > L.size and k <= (L.size + E.size):<br />
-	&emsp;&emsp;return pivot<br />
-	&emsp;else:<br />
-	&emsp;&emsp;return select(R,k)<br />
+  <div class="infocard">
+    <h3 id="selection">Selection</h3>
+    <p class="subh3">
+    <span class="subh3_bold">Runtime:</span> <br />
+    expected: O(n) <br />
+    worst case: O(n<sup>2</sup>)
+    </p>
+    <button id="selectsearch_toggle" onclick="toggleVisibility('selectsearch')">Show Pseudocode</button>
+    <pre><code id="selectsearch_code">
+    function select(list, k):
+    \\ base case omitted
+        pivot = list[rand(0, list.size)]
+        L = E = R = []
+        for x in list:
+            if x < pivot: L.append(x)
+            if x = pivot: E.append(x)
+            if x > pivot: R.append(x)
+        if k <= L.size:
+            return select(L,k)
+        else if k > L.size and k <= (L.size + E.size):
+            return pivot
+        else:
+            return select(R,k)
+    </code></pre>
+  </div>
+  <div class="infocard">
+    <h3 id="median-of-medians">Median of Medians</h3>
+    <p class="subh3">
+    <span class="subh3_bold">Runtime:</span> O(n) 
+    </p>
+    <button id="mom_toggle" onclick="toggleVisibility('mom')">Show Pseudocode</button>
+    <pre><code id="mom_code">
+    function momSelect(list, k):
+    //base cases omitted
+        miniLists = divide list into n/5 lists of 5
+        medians = []
+        for miniList in miniLists:
+            sort(miniList) // O(1) because list is always of length 5
+            medians.append(miniList[2])
+        pivot = momSelect(medians, medians.size()/2)
+    
+        L = E = R = []
+        for x in list:
+            if x < pivot: L.append(x)
+            if x = pivot: E.append(x)
+            if x > pivot: R.append(x)
+        if k <= L.size:
+            return select(L,k)
+        else if k > L.size and k <= (L.size + E.size):
+            return pivot
+        else:
+        return select(R,k)
+    </code></pre>
   </div>
 
-  <h3>Median of Medians</h3>
-  <p class="subh3">
-	<span class="subh3_bold">Runtime:</span> O(n) <br />
-  </p>
-  <div class="code_snippet">
-	function momSelect(list, k):<br />
-	//base cases omitted<br />
-	&emsp;miniLists = divide list into n/5 lists of 5<br />
-	&emsp;medians = []<br />
-	&emsp;for miniList in miniLists:<br />
-	&emsp;&emsp;sort(miniList) // O(1) because list is always of length 5<br />
-	&emsp;&emsp;medians.append(miniList[2])<br />
-	&emsp;pivot = momSelect(medians, medians.size()/2)<br />
-	<br />
-	&emsp;L = E = R = []<br />
-	&emsp;for x in list:<br />
-	&emsp;&emsp;if x < pivot: L.append(x)<br />
-	&emsp;&emsp;if x = pivot: E.append(x)<br />
-	&emsp;&emsp;if x > pivot: R.append(x)<br />
-	&emsp;if k <= L.size:<br />
-	&emsp;&emsp;return select(L,k)<br />
-	&emsp;else if k > L.size and k <= (L.size + E.size):<br />
-	&emsp;&emsp;return pivot<br />
-	&emsp;else:<br />
-	&emsp;return select(R,k)<br />
+  <div class="infocard">
+    <h3 id="binary-search">Binary Search</h3>
+    <p class="subh3">
+    <span class="subh3_bold">Runtime:</span> O(log n) <br />
+    <span class="subh3_bold">Notes:</span> 
+    Input: A – a sorted array, x – the item to find 
+    Output: true if x is in the array 
+    </p>
+    <button id="binary_toggle" onclick="toggleVisibility('binary')">Show Pseudocode</button>
+    <pre><code id="binary_code">
+    function binarySearch(A, x):
+        lo = 0
+        hi = A.size - 1
+        while lo < hi:
+            mid = (lo + hi) / 2
+            if A[mid] == x:
+                return true
+            if A[mid] < x:
+                lo = mid + 1
+            if A[mid] > x:
+                hi = mid – 1
+        return A[lo] == x
+    </code></pre>
+  </div>
+  <div class="infocard">
+    <h3 id="angular-graham-scan">Angular Graham Scan</h3>
+    <p class="subh3">
+    <span class="subh3_bold">Runtime:</span> O(n log n) 
+    </p>
   </div>
 
-  <h3>Binary Search</h3>
-  <p class="subh3">
-	<span class="subh3_bold">Runtime:</span> O(log n) <br />
-	<span class="subh3_bold">Notes:</span> <br />
-	Input: A – a sorted array, x – the item to find <br />
-	Output: true if x is in the array <br />
-  </p>
-  <div class="code_snippet">
-	function binarySearch(A, x):<br />
-	&emsp;lo = 0<br />
-	&emsp;hi = A.size - 1<br />
-	&emsp;while lo < hi:<br />
-	&emsp;&emsp;mid = (lo + hi) / 2<br />
-	&emsp;&emsp;if A[mid] == x:<br />
-	&emsp;&emsp;&emsp;return true<br />
-	&emsp;&emsp;if A[mid] < x:<br />
-	&emsp;&emsp;&emsp;lo = mid + 1<br />
-	&emsp;&emsp;if A[mid] > x:<br />
-	&emsp;&emsp;&emsp;hi = mid – 1<br />
-	&emsp;return A[lo] == x<br />
-  </div>
 
-  <h3>Angular Graham Scan</h3>
-  <p class="subh3">
-	<span class="subh3_bold">Runtime:</span> O(n log n) <br />
-  </p>
 
-<hr>
-
-  <h2> Tree Traversals </h2>
+  <h2 id="tree-traversals"> Tree Traversals </h2>
   <p class="subh2">Search through a tree</p>
 
-  <h3>Breadth-First Traversal</h3>
+<div class="infocard">
+  <h3 id="bfs">Breadth-First Traversal</h3>
   <p class="subh3">
-	<span class="subh3_bold">Runtime:</span> O(n log n) <br />
-	<span class="subh3_bold">Notes:</span> not in-place
+  <span class="subh3_bold">Runtime:</span> O(n log n) <br />
+  <span class="subh3_bold">Notes:</span> not in-place
   </p>
-  <div class="code_snippet">
-	function bft(root):<br />
-	// Input: root node of tree<br />
-	// Output: None<br />
-	&emsp;Q = new Queue()<br />
-	&emsp;enqueue root<br />
-	&emsp;while Q is not empty:<br />
-	&emsp;&emsp;node = Q.dequeue()<br />
-	&emsp;&emsp;visit(node)<br />
-	&emsp;&emsp;enqueue node’s left &amp; right children<br />
-  </div>
+  <button id="bfs_toggle" onclick="toggleVisibility('bfs')">Show Pseudocode</button>
+  <pre><code id="bfs_code">
+  function bft(root):
+  // Input: root node of tree
+  // Output: None
+      Q = new Queue()
+      enqueue root
+      while Q is not empty:
+          node = Q.dequeue()
+          visit(node)
+          enqueue node’s left &amp; right children
+  </code></pre>
+</div> 
+<div class="infocard">
+  <h3 id="dfs">Depth-First Traversal</h3>
+  <button id="dft_toggle" onclick="toggleVisibility('dft')">Show Pseudocode</button>
+  <pre><code id="dfs_code">
+  function dft(root):
+  // Input: root node of tree
+  // Output: None
+      S = new Stack()
+      push root onto S
+      while S is not empty:
+          node = S.pop()
+          visit(node)
+          push node’s left &amp; right children
+  </code></pre>
+</div> 
+<div class="infocard">
+  <h3 id="recursive-bfs">Recursive Breadth-First Traversal</h3>
+  <button id="recbfs_toggle" onclick="toggleVisibility('recbfs')">Show Pseudocode</button>
+  <pre><code id="recbfs_code">
+  function preorder(node):
+  // Input: root node of tree
+  // Output: None
+      visit(node)
+      if node has left child
+          preorder(node.left)
+      if node has right child
+          preorder(node.right)
+  
+  function inorder(node):
+  // Input: root node of tree
+  // Output: None
+      if node has left child
+          preorder(node.left)
+      visit(node)
+      if node has right child
+          preorder(node.right)
+  
+  function postorder(node):
+  // Input: root node of tree
+  // Output: None
+      if node has left child
+          postorder(node.left)
+      if node has right child
+          postorder(node.right)
+      visit(node)
+  </code></pre>
+</div>
 
-  <h3>Depth-First Traversal</h3>
-  <div class="code_snippet">
-	function dft(root):<br />
-	// Input: root node of tree<br />
-	// Output: None<br />
-	&emsp;S = new Stack()<br />
-	&emsp;push root onto S<br />
-	&emsp;while S is not empty:<br />
-	&emsp;&emsp;node = S.pop()<br />
-	&emsp;&emsp;visit(node)<br />
-	&emsp;&emsp;push node’s left &amp; right children<br />
-  </div>
 
-  <h3>Recursive Breadth-First Traversal</h3>
-  <div class="code_snippet">
-	function preorder(node):<br />
-	// Input: root node of tree<br />
-	// Output: None<br />
-	&emsp;visit(node)<br />
-	&emsp;if node has left child<br />
-	&emsp;&emsp;preorder(node.left)<br />
-	&emsp;if node has right child<br />
-	&emsp;&emsp;preorder(node.right)<br />
-	<br />
-	function inorder(node):<br />
-	// Input: root node of tree<br />
-	// Output: None<br />
-	&emsp;if node has left child<br />
-	&emsp;&emsp;preorder(node.left)<br />
-	&emsp;visit(node)<br />
-	&emsp;if node has right child<br />
-	&emsp;&emsp;preorder(node.right)<br />
-	<br />
-	function postorder(node):<br />
-	// Input: root node of tree<br />
-	// Output: None<br />
-	&emsp;if node has left child<br />
-	&emsp;&emsp;postorder(node.left)<br />
-	&emsp;if node has right child<br />
-	&emsp;&emsp;postorder(node.right)<br />
-	&emsp;visit(node)<br />
-  </div>
 
-<hr>
-
-  <h2> Graphs v Trees </h2>
-  <p> A graph G is a tree if and only if it satisfies any of the following 5 conditions: <br />
+  <h2 id="graphs-v-trees"> Graphs v Trees </h2>
+<p class="subh2">When is a Graph a Tree?</p>
+  <div class="infocard">
+  <p> A graph G is a tree if and only if it satisfies any of the following 5 conditions: </p>
   <ul>
-  	<li>G has V-1 edges and no cycles </li>
-	<li>G has V-1 edges and is connected</li>
-	<li>G is connected, but removing any edge disconnects it</li>
-	<li>G is acyclic, but adding any edges creates a cycle</li>
-	<li>Exactly one simple path connects each pair of vertices in G</li>
+    <li>G has V-1 edges and no cycles </li>
+  <li>G has V-1 edges and is connected</li>
+  <li>G is connected, but removing any edge disconnects it</li>
+  <li>G is acyclic, but adding any edges creates a cycle</li>
+  <li>Exactly one simple path connects each pair of vertices in G</li>
   </ul>
+</div>
 
-<hr>
 
-  <h2> Abstract Data Types (ADTs) </h2>
+  <h2 id="adts"> Abstract Data Types (ADTs) </h2>
+  <p class="subh2">Various types, functions, runtimes, and properties</p>
+<div class="infocard">
   <table>
-  	<tr><th>ADT</th><th>Structure</th><th>Main Methods</th><th>Properties</th></tr> 
-  	<tr>
-  		<td> PQ </td>
-  		<td> Heap </td>
-  		<td> insert(key,element)  O(log n) <br />
-  			 removeMin()          O(log n) <br />
-  			 <br />
-  			 upheap()             O(log n) <br />
-  			 downheap()           O(log n) <br />
-  		</td>
-  		<td>
-  			- Binary: each node has <= 2 children<br />
-  			- Key/priority at each node<br />
-  			- Left-complete<br />
-  			- Preserves heap order: min or max<br />
-  			&emsp;- min: n.key >= n.parent.key<br />
-  			&emsp;- max: n.key <= n.parent.key<br />
-  		</td>
-  	</tr>
-  	<tr>
-  		<td> Treap </td>
-  		<td> BST + Heap </td>
-  		<td> insert(key,element)  O(log n) <br />
-  			 removeMin()          O(log n) <br />
-  			 <br />
-  			 upheap()             O(log n) <br />
-  			 downheap()           O(log n) <br />
-  		</td>
-  		<td>
-  			- A non-empty tree <em>T</em> with a key and a priority at each node<br />
-  			- <em>T</em> has only one node, or<br />
-  			- <em>T</em> has a root <em>R</em> whose left and right subtrees are both treaps <br />
-  			- Node's priority preserves heap order<br />
-  			- Node's key preserves BST ordering<br />
-  		</td>
-  	</tr>
-  	<tr>
-  		<td> Tree </td>
-  		<td>  </td>
-  		<td><u>tree methods:</u><br />
-  			size() <br />
-  			isEmpty() <br />
-  			root() <br />
-  			<br />
-  			<u>node methods:</u><br />
-  			parent()<br />
-  			children()<br />
-  			isInternal()<br />
-  			isExternal()<br />
-  			isRoot()<br />
-  			<br />
-  			<u>binary tree node methods:</u><br />
-  			hasLeft()<br />
-  			hasRight()<br />
-  			left()<br />
-  			right()<br />
-  		</td>
-  		<td>
-  			# nodes = n <br />
-  			# edges = n - 1<br />
-  			height = h <br />
-  			<br />
-  			<u>perfect binary tree:</u> <br />
-  			height = h = log(n+1)-1 <sub>(base 2)</sub> <br />
-  			# nodes = n = 2<sup>(h+1)</sup>-1<br /> = 2L-1 <br />
-  			# leaves = L = 2<sup>h</sup><br />
-  		</td>
-  	</tr>
-  	<tr><td> Trie </td> <td> Prefix Tree </td><td> insert() <br /> find() </td><td> each node has a dictionary of children </td></tr>
+    <tr><th>ADT</th><th>Structure</th><th>Main Methods</th><th>Properties</th></tr> 
+    <tr>
+      <td> PQ </td>
+      <td> Heap </td>
+      <td> insert(key,element)  O(log n) <br />
+         removeMin()          O(log n) <br />
+         <br />
+         upheap()             O(log n) <br />
+         downheap()           O(log n) <br />
+      </td>
+      <td>
+        - Binary: each node has <= 2 children<br />
+        - Key/priority at each node<br />
+        - Left-complete<br />
+        - Preserves heap order: min or max<br />
+            - min: n.key >= n.parent.key<br />
+            - max: n.key <= n.parent.key<br />
+      </td>
+    </tr>
+    <tr>
+      <td> Treap </td>
+      <td> BST + Heap </td>
+      <td> insert(key,element)  O(log n) <br />
+         removeMin()          O(log n) <br />
+         <br />
+         upheap()             O(log n) <br />
+         downheap()           O(log n) <br />
+      </td>
+      <td>
+        - A non-empty tree <em>T</em> with a key and a priority at each node<br />
+        - <em>T</em> has only one node, or<br />
+        - <em>T</em> has a root <em>R</em> whose left and right subtrees are both treaps <br />
+        - Node's priority preserves heap order<br />
+        - Node's key preserves BST ordering<br />
+      </td>
+    </tr>
+    <tr>
+      <td> Tree </td>
+      <td>  </td>
+      <td><u>tree methods:</u><br />
+        size() <br />
+        isEmpty() <br />
+        root() <br />
+        <br />
+        <u>node methods:</u><br />
+        parent()<br />
+        children()<br />
+        isInternal()<br />
+        isExternal()<br />
+        isRoot()<br />
+        <br />
+        <u>binary tree node methods:</u><br />
+        hasLeft()<br />
+        hasRight()<br />
+        left()<br />
+        right()<br />
+      </td>
+      <td>
+        # nodes = n <br />
+        # edges = n - 1<br />
+        height = h <br />
+        <br />
+        <u>perfect binary tree:</u> <br />
+        height = h = log(n+1)-1 <sub>(base 2)</sub> <br />
+        # nodes = n = 2<sup>(h+1)</sup>-1 = 2L-1 <br />
+        # leaves = L = 2<sup>h</sup><br />
+      </td>
+    </tr>
+    <tr><td> Trie </td> <td> Prefix Tree </td><td> insert() <br /> find() </td><td> each node has a dictionary of children </td></tr>
   </table>
+</div>
 
 
-  <h2> Algorithms </h2>
+  <h2 id="algorithms"> Algorithms </h2>
+  <p class="subh2">Use cases, Runtimes, Data Structures</p>
+  <div class="infocard">
   <table>
-  	<tr><th>Problem</th><th>Algorithm</th><th>Runtime</th><th>Data Structure</th></tr> 
-  	<tr> <td>Sorting</td> <td>Insertion sort</td> <td>n<sup>2</sup></td> <td></td> </tr>
-  	<tr> <td></td> <td>Selection sort</td> <td>worst case: n<sup>2</sup><br>expected: n</td> <td></td> </tr>
-  	<tr> <td></td> <td>Merge sort</td> <td>n log n</td> <td></td> </tr>
-  	<tr> <td></td> <td>Quick sort</td> <td>n log n</td> <td></td> </tr>
-  	<tr> <td></td> <td>Radix sort</td> <td>dn</td> <td></td> </tr>
-  	<tr> <td>Tree Traversals</td> <td>Breadth first</td> <td></td> <td>Queue</td> </tr>
-  	<tr> <td></td> <td>Depth first</td> <td></td> <td>Stack</td> </tr>
-  	<tr> <td></td> <td>Pre-order</td> <td></td> <td></td> </tr>
-  	<tr> <td></td> <td>In-order</td> <td></td> <td></td> </tr>
-  	<tr> <td></td> <td>Post-order</td> <td></td> <td></td> </tr>
-  	<tr> <td></td> <td>Euler tour</td> <td>Left side: pre-order<br>Bottom: in-order<br>Right side: post-order</td> <td></td> </tr>
-  	<tr> <td>Graph stuff</td> <td>BFT</td> <td>V+E</td> <td>Queue</td> </tr>
-  	<tr> <td></td> <td>DFT</td> <td>V+E</td> <td>Stack</td> </tr>
-  	<tr> <td></td> <td>Top Sort</td> <td>V+E</td> <td>Stack, Queue, etc.</td> </tr>
-  	<tr> <td>Shortest Paths</td> <td>Dijkstra</td> <td>|V|<sup>2</sup><br><br>(|V|+|E|)* log|V|</td> <td>Array/Linked list <br><br>PQ/Binary Heap, etc.</td> </tr>
-  	<tr> <td></td> <td>A*</td> <td>(V+E)log(V)</td> <td>PQ/Binary Heap, etc.</td> </tr>
-  	<tr> <td></td> <td>Bellman-Ford</td> <td>VE</td> <td></td> </tr>
-  	<tr> <td>MSTs</td> <td>Prim-Jarnik</td> <td>(V+E)logV</td> <td>PQ</td> </tr>
-  	<tr> <td></td> <td>Kruskals<br>(plus union find)</td> <td>ElogE</td> <td><PQ/td> </tr>
+    <tr><th>Problem</th><th>Algorithm</th><th>Runtime</th><th>Data Structure</th></tr> 
+    <tr> <td>Sorting</td> <td>Insertion sort</td> <td>n<sup>2</sup></td> <td></td> </tr>
+    <tr> <td></td> <td>Selection sort</td> <td>worst case: n<sup>2</sup><br>expected: n</td> <td></td> </tr>
+    <tr> <td></td> <td>Merge sort</td> <td>n log n</td> <td></td> </tr>
+    <tr> <td></td> <td>Quick sort</td> <td>n log n</td> <td></td> </tr>
+    <tr> <td></td> <td>Radix sort</td> <td>dn</td> <td></td> </tr>
+    <tr> <td>Tree Traversals</td> <td>Breadth first</td> <td></td> <td>Queue</td> </tr>
+    <tr> <td></td> <td>Depth first</td> <td></td> <td>Stack</td> </tr>
+    <tr> <td></td> <td>Pre-order</td> <td></td> <td></td> </tr>
+    <tr> <td></td> <td>In-order</td> <td></td> <td></td> </tr>
+    <tr> <td></td> <td>Post-order</td> <td></td> <td></td> </tr>
+    <tr> <td></td> <td>Euler tour</td> <td>Left side: pre-order<br>Bottom: in-order<br>Right side: post-order</td> <td></td> </tr>
+    <tr> <td>Graph stuff</td> <td>BFT</td> <td>V+E</td> <td>Queue</td> </tr>
+    <tr> <td></td> <td>DFT</td> <td>V+E</td> <td>Stack</td> </tr>
+    <tr> <td></td> <td>Top Sort</td> <td>V+E</td> <td>Stack, Queue, etc.</td> </tr>
+    <tr> <td>Shortest Paths</td> <td>Dijkstra</td> <td>|V|<sup>2</sup><br><br>(|V|+|E|)* log|V|</td> <td>Array/Linked list <br><br>PQ / Binary Heap, etc.</td> </tr>
+    <tr> <td></td> <td>A*</td> <td>(V+E)log(V)</td> <td>PQ/Binary Heap, etc.</td> </tr>
+    <tr> <td></td> <td>Bellman-Ford</td> <td>VE</td> <td></td> </tr>
+    <tr> <td>MSTs</td> <td>Prim-Jarnik</td> <td>(V+E)logV</td> <td>PQ</td> </tr>
+    <tr> <td></td> <td>Kruskals<br>(plus union find)</td> <td>ElogE</td> <td><PQ/td> </tr>
   </table>
-
+</div>
 
   </body>
+  <script>
+function toggleVisibility(id) {
+    var x = document.getElementById(id + '_code');
+    if (x.style.display === 'none' || x.style.display == '') {
+        x.style.display = 'block';
+        document.getElementById(id + '_toggle').innerHTML = 'Hide Pseudocode'
+    } else {
+        x.style.display = 'none';
+        document.getElementById(id + '_toggle').innerHTML = 'Show Pseudocode'
+    }
+}
+
+  </script>
 </html>
