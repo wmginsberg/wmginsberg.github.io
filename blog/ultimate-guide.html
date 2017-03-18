@@ -28,6 +28,7 @@
       }
       table {
           border-collapse: collapse;
+          width: 100%;
       }
 
       table, th, td {
@@ -90,12 +91,14 @@
       }
       pre {
         margin: 0;
+        width:100%;
       }
       code {
         display: none;
         padding-left: 10px;
-        font-size: 12px;
+        font-size: 16px;
         margin-top: 10px;
+        width: 100%;
       }
       button {
         background-color:#20c5bf;
@@ -177,26 +180,25 @@
     <span class="subh3_bold">Notes:</span> Relaxes |E| edges, |V|-1 times. Can process negative edge weights.
     </p>
     <button id="bellman_toggle" onclick="toggleVisibility('bellman')">Show Pseudocode</button>
-    <pre><code id="bellman_code">
-    function BellmanFord(V,E,src):
-        for each vertex v in vertices:
-            v.dist = infinity
-            if v = src:
-                v.dist = 0
-                v.prev = null
-        repeat |V|-1 times:
-            for each edge (u,v) in E:
-                if u.dist + (u,v).weight < v.dist:
-                    v.dist = u.dist + (u,v).weight
-                    v.prev = u
-        // checking for negative cycles
-        for each edge (u,v) in E:
-            if u.dist + (u,v).weight < v.dist:
-                throw new NegativeCycleException()
-        // build tree
-        for v in V:
-            if v.prev is not null:
-                tree.append(connecting_edge(v, v.prev))
+    <pre><code id="bellman_code">function BellmanFord(V,E,src):
+  for each vertex v in vertices:
+      v.dist = infinity
+      if v = src:
+          v.dist = 0
+          v.prev = null
+  repeat |V|-1 times:
+      for each edge (u,v) in E:
+          if u.dist + (u,v).weight < v.dist:
+              v.dist = u.dist + (u,v).weight
+              v.prev = u
+  // checking for negative cycles
+  for each edge (u,v) in E:
+      if u.dist + (u,v).weight < v.dist:
+          throw new NegativeCycleException()
+  // build tree
+  for v in V:
+      if v.prev is not null:
+          tree.append(connecting_edge(v, v.prev))
     </code></pre>
   </div>
 
@@ -207,20 +209,20 @@
     </p>
     <button id="topsort_toggle" onclick="toggleVisibility('topsort')">Show Pseudocode</button>
     <pre><code id="topsort_code">function TopSort(G):
-    S = Stack()
-    L = []
-    for each vertex in G:
-        if vertex has no incident edges:
-            S.push(vertex)
-    while S is not empty:
-        v = S.pop()
-        L.append(v)
-        for each outgoing edge e from v:
-            w = e.destination
-            delete e
-            if w has no incident edges:
-                S.push(w)
-    return L
+  S = Stack()
+  L = []
+  for each vertex in G:
+      if vertex has no incident edges:
+          S.push(vertex)
+  while S is not empty:
+      v = S.pop()
+      L.append(v)
+      for each outgoing edge e from v:
+          w = e.destination
+          delete e
+          if w has no incident edges:
+              S.push(w)
+  return L
     </code></pre>  
   </div>  
 
@@ -237,25 +239,24 @@
     <span class="subh3_bold">Notes:</span> Best to prove correctness by induction. This is a greedy algorithm.
     </p>
     <button id="prim_toggle" onclick="toggleVisibility('prim')">Show Pseudocode</button>
-    <pre><code id="prim_code">
-    function prim(G):
-        for all vertices v in G:
-            v.cost = infinity
-            v.prev = null
-        source = a random v in V
-        source.cost = 0
-        MST = []
-        PQ = PriorityQueue(V)
-        while PQ is not empty:
-            v = PQ>removeMin()
-            if v.prev != null:
-                MST.append((v,v.prev))
-            for all incident edges (v,u) of v:
-                if u.cost > (v,u).weight
-                    u.cost = (v,u).weight
-                    u.prev = v 
-                PQ.replaceKey(u,u.cost)
-        return MST
+    <pre><code id="prim_code">function prim(G):
+  for all vertices v in G:
+      v.cost = infinity
+      v.prev = null
+  source = a random v in V
+  source.cost = 0
+  MST = []
+  PQ = PriorityQueue(V)
+  while PQ is not empty:
+      v = PQ>removeMin()
+      if v.prev != null:
+          MST.append((v,v.prev))
+      for all incident edges (v,u) of v:
+          if u.cost > (v,u).weight
+              u.cost = (v,u).weight
+              u.prev = v 
+          PQ.replaceKey(u,u.cost)
+  return MST
     </code></pre>
   </div>  
 
@@ -267,19 +268,18 @@
     <span class="subh3_bold">Notes:</span> Sorts all edges of the graph by weight in ascending order, and if its addition doesn’t create a cycle, add it to the MST. Detect cycles with “clouds”.
     </p>
     <button id="kruskal_toggle" onclick="toggleVisibility('kruskal')">Show Pseudocode</button>
-    <pre><code id="kruskal_code">
-    function kruskal(G):
-        for vertices v in G:
-            v.parent = v
-            v.rank = 0
-        MST = []
-        for all edges(u,v) in G sorted by weight:
-            if u and v are not in same cloud:
-            if v.prev != null:
-                MST.append((u,v))
-                this.mergeClouds(u.parent, v.parent)
-                this.pathCompress(v)
-        return MST
+    <pre><code id="kruskal_code">function kruskal(G):
+  for vertices v in G:
+      v.parent = v
+      v.rank = 0
+  MST = []
+  for all edges(u,v) in G sorted by weight:
+      if u and v are not in same cloud:
+      if v.prev != null:
+          MST.append((u,v))
+          this.mergeClouds(u.parent, v.parent)
+          this.pathCompress(v)
+  return MST
     </code></pre>
 
     <p class="subh3">
@@ -288,21 +288,20 @@
     </p>
 
     <button id="merge_toggle" onclick="toggleVisibility('merge')">Show Pseudocode</button>
-    <pre><code id="merge_code">
-    function mergeClouds(p1, p2): // union
-        if p1.rank > p2.rank:
-            p2.parent = p1
-        else if p1.rank < p2.rank:
-            p1.parent = p2
-        else:
-            p2.parent = p1
-            p1.rank++
-    
-    
-    function pathCompress(v): // find
-        if v != v.parent:
-            v.parent = pathCompress(v.parent)
-        return v.parent
+    <pre><code id="merge_code">function mergeClouds(p1, p2): // union
+  if p1.rank > p2.rank:
+      p2.parent = p1
+  else if p1.rank < p2.rank:
+      p1.parent = p2
+  else:
+      p2.parent = p1
+      p1.rank++
+
+
+function pathCompress(v): // find
+  if v != v.parent:
+      v.parent = pathCompress(v.parent)
+  return v.parent
     </code></pre>
   </div>
 
@@ -333,28 +332,27 @@
     <span class="subh3_bold">Notes:</span> not in-place
     </p>
     <button id="mergesort_toggle" onclick="toggleVisibility('mergesort')">Show Pseudocode</button>
-    <pre><code id="mergesort_code">
-    function merge_sort(A):
-        n = A.length()
-        if n <= 1:
-            return A
-        mid = n/2
-        left = mergeSort(A[0 … mid-1])
-        right = mergeSort(A[mid .. n-1])
-        return merge(left,right)
+    <pre><code id="mergesort_code">function merge_sort(A):
+    n = A.length()
+    if n <= 1:
+        return A
+    mid = n/2
+    left = mergeSort(A[0 … mid-1])
+    right = mergeSort(A[mid .. n-1])
+    return merge(left,right)
 
-    function merge(A, B):
-        result = []
-        aIndex = bIndex = 0
-        while aIndex < A.length() and bIndex < B.length():
-            if A[aIndex] < B[bIndex]:
-                result.append(A[aIndex])
-                aIndex++
-        if aIndex < A.length():
-            result = result + A[aIndex...end]
-        if bIndex < B.length():
-            result = result + B[bIndex...end]
-        return result
+function merge(A, B):
+  result = []
+  aIndex = bIndex = 0
+  while aIndex < A.length() and bIndex < B.length():
+      if A[aIndex] < B[bIndex]:
+          result.append(A[aIndex])
+          aIndex++
+  if aIndex < A.length():
+      result = result + A[aIndex...end]
+  if bIndex < B.length():
+      result = result + B[bIndex...end]
+  return result
     
     </code></pre>
   </div>
@@ -366,14 +364,13 @@
     <span class="subh3_bold">Notes:</span> usually written iteratively and in-place. finds the min and moves it to the first index (then second, third, etc.)
     </p>
     <button id="selection_toggle" onclick="toggleVisibility('selection')">Show Pseudocode</button>
-    <pre><code id="selection_code">
-    function selection_sort(A):
-        // Input: Unsorted List
-        // Output: Sorted List
-        n = A.length
-        for i = 0 to n-2:
-            min = argmin(A[i...n-1])
-            swap A[i] with A[min]
+    <pre><code id="selection_code">function selection_sort(A):
+  // Input: Unsorted List
+  // Output: Sorted List
+  n = A.length
+  for i = 0 to n-2:
+      min = argmin(A[i...n-1])
+      swap A[i] with A[min]
     </code></pre>
 
   </div>
@@ -385,15 +382,14 @@
     <span class="subh3_bold">Notes:</span> very fast if already partially sorted
     </p>
     <button id="insert_toggle" onclick="toggleVisibility('insert')">Show Pseudocode</button>
-    <pre><code id="insert_code">
-    function insertion_sort(A):
-        n = A.length()
-        for i = 1 to n-1:
-            for j = i down to 1:
-                if A[j] < A[j-1]:
-                    swap A[j] and A[j-1]
-                else:
-                    break
+    <pre><code id="insert_code">function insertion_sort(A):
+  n = A.length()
+  for i = 1 to n-1:
+      for j = i down to 1:
+          if A[j] < A[j-1]:
+              swap A[j] and A[j-1]
+          else:
+              break
     </code></pre>
 
   </div>
@@ -403,13 +399,12 @@
     <span class="subh3_bold">Notes:</span> in-place
     </p>
     <button id="reverse_toggle" onclick="toggleVisibility('reverse')">Show Pseudocode</button>
-    <pre><code id="reverse_code">
-    function reverse(A):
-        n = A.length
-        for i = 0 to n/2:
-            temp = A[i]
-            A[i] = A[n−1−i]
-            A[n−1−i] = temp
+    <pre><code id="reverse_code">function reverse(A):
+  n = A.length
+  for i = 0 to n/2:
+      temp = A[i]
+      A[i] = A[n−1−i]
+      A[n−1−i] = temp
     
     </code></pre>
 
@@ -422,23 +417,22 @@
     <span class="subh3_bold">Notes:</span> divide and conquer around a random pivot point. partition the input list into L, E, and G for numbers less than equal to or greater than the pivot point. recursively solve until in order.
     </p>
     <button id="quick_toggle" onclick="toggleVisibility('quick')">Show Pseudocode</button>
-    <pre><code id="quick_code">
-    function quick_sort(A):
-    // Input: Unsorted List
-    // Output: Sorted List
-        n = A.length
-        if n <= 1
-            return A
-        pivot = random element from A
-        L, E, G = [ ]
-        for each x in A:
-            if x < pivot:
-                L.append(x)
-            else if x > pivot:
-                G.append(x)
-            else:
-                E.append(x)
-        return quick_sort(L) + E + quick_sort(G)  
+    <pre><code id="quick_code">function quick_sort(A):
+// Input: Unsorted List
+// Output: Sorted List
+  n = A.length
+  if n <= 1
+      return A
+  pivot = random element from A
+  L, E, G = [ ]
+  for each x in A:
+      if x < pivot:
+          L.append(x)
+      else if x > pivot:
+          G.append(x)
+      else:
+          E.append(x)
+  return quick_sort(L) + E + quick_sort(G)  
     </code></pre>
 
   </div>
@@ -452,14 +446,14 @@
     <pre><code id="radix_code">function radix_sort(A):
 // Input: unsorted list
 // Output: sorted list
-    buckets = array of 10 lists
-    for place = least to most significant
-        for number in A
-            d = digit in number at place
-            bucket[d].append(number)
-        A = concatenate all buckets in order
-        empty all buckets
-    return A
+  buckets = array of 10 lists
+  for place = least to most significant
+      for number in A
+          d = digit in number at place
+          bucket[d].append(number)
+      A = concatenate all buckets in order
+      empty all buckets
+  return A
     </code></pre>
 
   </div>
@@ -477,20 +471,20 @@
     </p>
     <button id="selectsearch_toggle" onclick="toggleVisibility('selectsearch')">Show Pseudocode</button>
     <pre><code id="selectsearch_code">
-    function select(list, k):
-    \\ base case omitted
-        pivot = list[rand(0, list.size)]
-        L = E = R = []
-        for x in list:
-            if x < pivot: L.append(x)
-            if x = pivot: E.append(x)
-            if x > pivot: R.append(x)
-        if k <= L.size:
-            return select(L,k)
-        else if k > L.size and k <= (L.size + E.size):
-            return pivot
-        else:
-            return select(R,k)
+function select(list, k):
+\\ base case omitted
+  pivot = list[rand(0, list.size)]
+  L = E = R = []
+  for x in list:
+      if x < pivot: L.append(x)
+      if x = pivot: E.append(x)
+      if x > pivot: R.append(x)
+  if k <= L.size:
+      return select(L,k)
+  else if k > L.size and k <= (L.size + E.size):
+      return pivot
+  else:
+      return select(R,k)
     </code></pre>
   </div>
   <div class="infocard">
@@ -500,26 +494,27 @@
     </p>
     <button id="mom_toggle" onclick="toggleVisibility('mom')">Show Pseudocode</button>
     <pre><code id="mom_code">
-    function momSelect(list, k):
-    //base cases omitted
-        miniLists = divide list into n/5 lists of 5
-        medians = []
-        for miniList in miniLists:
-            sort(miniList) // O(1) because list is always of length 5
-            medians.append(miniList[2])
-        pivot = momSelect(medians, medians.size()/2)
-    
-        L = E = R = []
-        for x in list:
-            if x < pivot: L.append(x)
-            if x = pivot: E.append(x)
-            if x > pivot: R.append(x)
-        if k <= L.size:
-            return select(L,k)
-        else if k > L.size and k <= (L.size + E.size):
-            return pivot
-        else:
-        return select(R,k)
+function momSelect(list, k):
+//base cases omitted
+  miniLists = divide list into n/5 lists of 5
+  medians = []
+  for miniList in miniLists:
+      // sort is O(1) because list is always of length 5
+      sort(miniList) 
+      medians.append(miniList[2])
+  pivot = momSelect(medians, medians.size()/2)
+
+  L = E = R = []
+  for x in list:
+      if x < pivot: L.append(x)
+      if x = pivot: E.append(x)
+      if x > pivot: R.append(x)
+  if k <= L.size:
+      return select(L,k)
+  else if k > L.size and k <= (L.size + E.size):
+      return pivot
+  else:
+  return select(R,k)
     </code></pre>
   </div>
 
@@ -533,18 +528,18 @@
     </p>
     <button id="binary_toggle" onclick="toggleVisibility('binary')">Show Pseudocode</button>
     <pre><code id="binary_code">
-    function binarySearch(A, x):
-        lo = 0
-        hi = A.size - 1
-        while lo < hi:
-            mid = (lo + hi) / 2
-            if A[mid] == x:
-                return true
-            if A[mid] < x:
-                lo = mid + 1
-            if A[mid] > x:
-                hi = mid – 1
-        return A[lo] == x
+function binarySearch(A, x):
+  lo = 0
+  hi = A.size - 1
+  while lo < hi:
+      mid = (lo + hi) / 2
+      if A[mid] == x:
+          return true
+      if A[mid] < x:
+          lo = mid + 1
+      if A[mid] > x:
+          hi = mid – 1
+  return A[lo] == x
     </code></pre>
   </div>
   <div class="infocard">
@@ -567,62 +562,62 @@
   </p>
   <button id="bfs_toggle" onclick="toggleVisibility('bfs')">Show Pseudocode</button>
   <pre><code id="bfs_code">
-  function bft(root):
-  // Input: root node of tree
-  // Output: None
-      Q = new Queue()
-      enqueue root
-      while Q is not empty:
-          node = Q.dequeue()
-          visit(node)
-          enqueue node’s left &amp; right children
+function bft(root):
+// Input: root node of tree
+// Output: None
+  Q = new Queue()
+  enqueue root
+  while Q is not empty:
+      node = Q.dequeue()
+      visit(node)
+      enqueue node’s left &amp; right children
   </code></pre>
 </div> 
 <div class="infocard">
   <h3 id="dfs">Depth-First Traversal</h3>
   <button id="dft_toggle" onclick="toggleVisibility('dft')">Show Pseudocode</button>
-  <pre><code id="dfs_code">
-  function dft(root):
-  // Input: root node of tree
-  // Output: None
-      S = new Stack()
-      push root onto S
-      while S is not empty:
-          node = S.pop()
-          visit(node)
-          push node’s left &amp; right children
+  <pre><code id="dft_code">
+function dft(root):
+// Input: root node of tree
+// Output: None
+  S = new Stack()
+  push root onto S
+  while S is not empty:
+      node = S.pop()
+      visit(node)
+      push node’s left &amp; right children
   </code></pre>
 </div> 
 <div class="infocard">
   <h3 id="recursive-bfs">Recursive Breadth-First Traversal</h3>
   <button id="recbfs_toggle" onclick="toggleVisibility('recbfs')">Show Pseudocode</button>
   <pre><code id="recbfs_code">
-  function preorder(node):
-  // Input: root node of tree
-  // Output: None
-      visit(node)
-      if node has left child
-          preorder(node.left)
-      if node has right child
-          preorder(node.right)
-  
-  function inorder(node):
-  // Input: root node of tree
-  // Output: None
-      if node has left child
-          preorder(node.left)
-      visit(node)
-      if node has right child
-          preorder(node.right)
-  
-  function postorder(node):
-  // Input: root node of tree
-  // Output: None
-      if node has left child
-          postorder(node.left)
-      if node has right child
-          postorder(node.right)
-      visit(node)
+function preorder(node):
+// Input: root node of tree
+// Output: None
+  visit(node)
+  if node has left child
+      preorder(node.left)
+  if node has right child
+      preorder(node.right)
+
+function inorder(node):
+// Input: root node of tree
+// Output: None
+  if node has left child
+      preorder(node.left)
+  visit(node)
+  if node has right child
+      preorder(node.right)
+
+function postorder(node):
+// Input: root node of tree
+// Output: None
+  if node has left child
+      postorder(node.left)
+  if node has right child
+      postorder(node.right)
+  visit(node)
   </code></pre>
 </div>
 
