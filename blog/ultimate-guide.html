@@ -484,7 +484,7 @@ function select(list, k):
   else if k > L.size and k <= (L.size + E.size):
       return pivot
   else:
-      return select(R,k)
+      return select(R,k - (L.size + E.size))
     </code></pre>
   </div>
   <div class="infocard">
