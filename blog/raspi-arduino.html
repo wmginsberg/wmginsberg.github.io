@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<style>
+.text_container {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-left: 75px;
+    margin-right: 75px;
+}
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+html {
+    background-color: white;
+}
+p {
+    line-height: 1.3;
+}
+h1,h2 {
+    font-family: "Lucida Console", Monaco, monospace;
+}
+.code_font {
+    font-family: "Courier New", Courier, monospace;
+}
+
+.code {
+    border: 1px solid gray;
+    padding: 10px;
+    margin: 5px;
+    font-family: "Courier New", Courier, monospace;
+    background-color: #f3ecff;
+}
+
+.warning {
+    background-color: #ecf8ff;
+    padding: 3px;
+}
+
+.note {
+    -background-color: lightgoldenrodyellow;
+    font-style: italic;
+    padding: 3px;
+}
+a {
+    color: darkslategray;
+    text-decoration: none;
+    font-weight: bold;
+}
+a:hover {
+    color: #893BFF;
+    background-color: #f8ffec;
+}
+
+::selection {
+  background: #f8ffec; /* WebKit/Blink Browsers */
+}
+::-moz-selection {
+  background: #f8ffec; /* Gecko Browsers */
+}
+figure, img, figcaption {
+    max-height: 500px;
+    margin: auto;
+    display: block;
+    text-align: center;
+}
+ol {
+    list-style-type: upper-roman;
+    font-family: "Courier New", Courier, monospace;
+}
+</style>
+
+<head>
+  <title>Routing with Polymer and Express</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Routing with Polymer and Flask">
+  <meta name="keywords" content="Polymer, Flask, server-side routing">
+  <meta name="author" content="Wendy Ginsberg">
+  <link rel='shortcut icon' href='../images/favicon.ico' type='image/x-icon'/ >
+</head>
+
+<body>
+<div class="text_container">
+<h1> Hardware for software devs </h1>
+<h5> Posted by <a target="_blank" href="https://twitter.com/wmginsberg">wmginsberg</a> on may 25th, 2017 | 10 minute read </h5>
+<p>
+    Raspberry Pi (2/3/A/B/A+/B+), Arduino (UNO/Nano/Mini/Micro), Makey Makey, off-brand chips, etc. Diving into the world hardware from software can be kind of overwhelming. Programming is free and generally can't electrocute or burn you, but it can't be touched or felt, which can make hardware cool and attractive to all types of engineers. If you're a programmer looking to get into hardware, I'll lay out a few well-lit paths. 
+</p> 
+
+<h2> Raspberry Pi </h2>
+<p>
+The Raspberry Pi Foundation is a non profit organization based in the UK that builds $35 credit-card sized computers with the goal of making CS education much more accessible. They just need peripherals (HDMI screen and keyboard), a power source, and an SD card with an OS image (free to download or buy online) to run.
+</p>
+
+<p>
+The Raspberry Pi Model B+ also has 4 USB 2.0 ports, a micro SF slot, an ethernet port, HDMI port, 3mm audio jack, and 40 GPIO (General Purpose Input/Output) pins. This is what it looks like:
+<br>
+<img src="../images/Raspberry-Pi-Model-B-Web.jpg"/>
+<br>
+It can also run a variety of OSs including Raspbian (Raspberry Pi linux), Ubuntu, Windows 10, and a <a target="_blank" href="https://www.raspberrypi.org/downloads/">bunch</a> more. 
+</p>
+
+
+</body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-87601009-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</html>
+
+
