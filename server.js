@@ -39,6 +39,12 @@ app.get('/ultimate-guide', function(req, res){
     res.sendFile("/blog/ultimate-guide.html", {root: '.'});
 });
 
+// --------------- POSTS ----------------
+
+app.get('/where-ive-been', function(req, res){
+    res.sendFile("/where-ive-been.html", {root: '.'});
+});
+
 
 // Tell the app to listen for requests on port 8083
 app.listen(port, function () {

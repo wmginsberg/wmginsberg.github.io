@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<style>
+.text_container {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-left: 75px;
+    margin-right: 75px;
+}
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+html {
+    background-color: white;
+}
+p {
+    line-height: 1.3;
+}
+h1,h2 {
+    font-family: "Lucida Console", Monaco, monospace;
+}
+.code_font {
+    font-family: "Courier New", Courier, monospace;
+}
+
+.code {
+    border: 1px solid gray;
+    padding: 10px;
+    margin: 5px;
+    font-family: "Courier New", Courier, monospace;
+    background-color: #f3ecff;
+}
+
+.warning {
+    background-color: #ecf8ff;
+    padding: 3px;
+}
+
+.note {
+    -background-color: lightgoldenrodyellow;
+    font-style: italic;
+    padding: 3px;
+}
+a {
+    color: darkslategray;
+    text-decoration: none;
+    font-weight: bold;
+}
+a:hover {
+    color: #893BFF;
+    background-color: #f8ffec;
+}
+
+::selection {
+  background: #f8ffec; /* WebKit/Blink Browsers */
+}
+::-moz-selection {
+  background: #f8ffec; /* Gecko Browsers */
+}
+figure, img, figcaption {
+    max-height: 500px;
+    margin: auto;
+    display: block;
+    text-align: center;
+}
+ol {
+    list-style-type: upper-roman;
+    font-family: "Courier New", Courier, monospace;
+}
+</style>
+
+<head>
+  <title>Arduino, Rasberry Pi, Polymer, and Firebase</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Arduino, Rasberry Pi, Polymer, and Firebase">
+  <meta name="keywords" content="Arduino, Rasberry Pi, Polymer, Firebase, hardware">
+  <meta name="author" content="Wendy Ginsberg">
+  <link rel='shortcut icon' href='../images/favicon.ico' type='image/x-icon'/ >
+</head>
+
+<body>
+<div class="text_container">
+<h1> Arduino, Rasberry Pi, Polymer, and Firebase </h1>
+<h5> Posted by <a target="_blank" href="https://twitter.com/wmginsberg">wmginsberg</a> on may 28th, 2017 | 10 minute read </h5>
+<p>
+    Did you ever want to work on home automation projects? Build your own smart security camera, or a robot, or a system to monitor your pet lizard's tank conditions including what you fed him and when? Me too! Particularly the last one. That's why I decided to combine my two hobbies, making cool hardware hacks, and making <span id="strikethrough">dumb</span>innovative web apps. Since the details of my projects aren't all that relevant, I figured I'd just share some things I learned about how oddly simple it is to stream data from hardware sensors to the web.   
+</p> 
+
+<h2> What tools did I use? </h2>
+<p>
+Ok, something that really frustrates me about any sort of hardware/software development is that any project takes a damn village to kick up. Here's an example: a stable monitoring system and pretty web app includes all of these products and services, but is actually pretty simple (and can be simpler):
+  <ul> My version
+    <li> Hardware: Raspberry Pi 3 Model B+ (running Raspbian), homemade 3.3V/5V Arduino board, DHT22 sensor</li>
+    <li> Cables &amp; Power: 3 jumper cables, Micro USB 5V power supply, USB A to B cable</li>
+    <li> Web stuff: Polymer, Firebase, Nodejs, Heroku, various Python libraries (i.e. PySerial)</li>
+    <li> Languages: C/C++, Python, JS/HTML/CSS</li>
+  </ul>
+  <ul> Simpler (and uglier!) version
+    <li> Hardware: Raspberry Pi 3 Model B+ (running Raspbian), homemade 3.3V/5V Arduino board, DHT22 sensor</li>
+    <li> Cables &amp; Power: 3 jumper cables, Micro USB 5V power supply, USB A to B cable</li>
+    <li> Web stuff: Flask, Heroku, PySerial, various Python libraries</li>
+    <li> Languages: C/C++, Python</li>
+  </ul>
+</p>
+
+<h2>How does it work?</h2>
+<p>
+ Choose your sensors
+</p>
+
+
+</body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-87601009-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</html>
+
+
