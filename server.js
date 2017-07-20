@@ -45,7 +45,7 @@ app.get('/where-ive-been', function(req, res){
     res.sendFile("/where-ive-been.html", {root: '.'});
 });
 
-app.get('/caresheet', function(req, res){
+app.get('/petsit', function(req, res){
     res.sendFile("/petsit.html", {root: '.'});
 });
 
