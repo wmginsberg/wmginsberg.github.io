@@ -49,8 +49,8 @@ app.get('/petsit', function(req, res){
     res.sendFile("/petsit.html", {root: '.'});
 });
 
-app.get('/resume', function(req, res){
-    res.sendFile("/WendyGinsberg_2017.pdf", {root: '.'});
+app.get('/resume-pdf', function(req, res){
+    res.sendFile("/resume-pdf.pdf", {root: '.'});
 });
 
 
