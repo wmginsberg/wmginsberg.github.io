@@ -49,6 +49,10 @@ app.get('/petsit', function(req, res){
     res.sendFile("/petsit.html", {root: '.'});
 });
 
+app.get('/resume', function(req, res){
+    res.sendFile("/WendyGinsberg_2017.pdf", {root: '.'});
+});
+
 
 // Tell the app to listen for requests on port 8083
 app.listen(port, function () {
