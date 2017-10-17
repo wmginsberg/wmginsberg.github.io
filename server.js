@@ -21,6 +21,10 @@ app.get('/', function(req, res){
 
 // --------------- BLOG POSTS ----------------
 
+app.get('/blog', function(req, res){
+    res.redirect('https://wmginsberg.github.io');
+});
+
 app.get('/blog/poly-express', function(req, res){
     res.sendFile("/blog/poly-express.html", {root: '.'});
 });
