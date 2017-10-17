@@ -57,48 +57,89 @@ a:hover {
 ::-moz-selection {
   background: #f8ffec; /* Gecko Browsers */
 }
-figure, img, figcaption {
-    max-height: 500px;
+figure {
+    display: inline-block;
+    margin-left: 10px;
+}
+img {
+    min-height: 200px;
+    max-height: 225px;
     margin: auto;
-    display: block;
     text-align: center;
 }
-ol {
-    list-style-type: upper-roman;
-    font-family: "Courier New", Courier, monospace;
+figcaption {
+  text-align: center;
 }
 </style>
 
 <head>
-  <title>Routing with Polymer and Express</title>
+  <title>Raspberry Pi 101 | Hardware for Software People</title>
   <meta charset="UTF-8">
-  <meta name="description" content="Routing with Polymer and Flask">
-  <meta name="keywords" content="Polymer, Flask, server-side routing">
+  <meta name="description" content="Hardware for Software People. An introduction to the Raspberry Pi, Raspberry Pi 101">
+  <meta name="keywords" content="Raspberry Pi, raspi, introduction, hardware">
   <meta name="author" content="Wendy Ginsberg">
   <link rel='shortcut icon' href='../images/favicon.ico' type='image/x-icon'/ >
 </head>
 
 <body>
 <div class="text_container">
-<h1> Hardware for software devs </h1>
-<h5> Posted by <a target="_blank" href="https://twitter.com/wmginsberg">wmginsberg</a> on may 25th, 2017 | 10 minute read </h5>
+<h1> Hardware for Software People </h1>
+<h5> Posted by <a target="_blank" href="https://twitter.com/wmginsberg">wmginsberg</a> on oct 17th, 2017 | 10 minute read </h5>
 <p>
-    Raspberry Pi (2/3/A/B/A+/B+), Arduino (UNO/Nano/Mini/Micro), Makey Makey, off-brand chips, etc. Diving into the world hardware from software can be kind of overwhelming. Programming is free and generally can't electrocute or burn you, but it can't be touched or felt, which can make hardware cool and attractive to all types of engineers. If you're a programmer looking to get into hardware, I'll lay out a few well-lit paths. 
+  Diving into the world hardware from software can be kind of overwhelming. Programming is free and generally can't electrocute or burn you, but it also can't be touched or felt, which can make hardware cool and attractive to all types of engineers. Also.. with hardware it costs dollars to build something, not just a couple cents here and there for compute power. That's foreign to most open source developers and (non-iOS) mobile developers. If you're a programmer who wants to know wtf you would do with a Raspberry Pi, why people care about them, and how to get one set up, I'll give a brief intro. I intend this to be part of a series, so let me know what else you're interested in! 
 </p> 
 
-<h2> Raspberry Pi </h2>
+<h2> Raspberry Pi 101 </h2>
+<h3> Who makes it? </h3>
 <p>
-The Raspberry Pi Foundation is a non profit organization based in the UK that builds $35 credit-card sized computers with the goal of making CS education much more accessible. They just need peripherals (HDMI screen and keyboard), a power source, and an SD card with an OS image (free to download or buy online) to run.
+The Raspberry Pi Foundation is a non profit organization based in the UK that builds $35 credit-card sized computers with the goal of making computing and CS education much more accessible. To run, the computers just need a monitor + keyboard, a power source, and an SD card (free to download or buy online).
 </p>
 
-<p>
-The Raspberry Pi Model B+ also has 4 USB 2.0 ports, a micro SF slot, an ethernet port, HDMI port, 3mm audio jack, and 40 GPIO (General Purpose Input/Output) pins. This is what it looks like:
-<br>
-<img src="../images/Raspberry-Pi-Model-B-Web.jpg"/>
-<br>
-It can also run a variety of OSs including Raspbian (Raspberry Pi linux), Ubuntu, Windows 10, and a <a target="_blank" href="https://www.raspberrypi.org/downloads/">bunch</a> more. 
-</p>
+<h3> What are they? </h3>
+<p> So basically, they're computers like any other. They're computers that you can easily plug sensors and gadgets into, stack into a cluster, or use like you would a standard linux or windows machine. You can run code on them just like any other machine, and even use it to power a <a target="_blank" href="http://www.instructables.com/id/Awesome-DIY-Raspberry-Pi-Laptops/">DIY laptop</a> for cheap. </p> 
 
+<h3> Which one should I get? </h3>
+<p>
+The most standard model is the Raspberry Pi 3 Model B. It has 4 USB 2.0 ports, a micro SD slot, an ethernet port, HDMI port, 3mm audio jack, and 40 GPIO (General Purpose Input/Output) pins. It can also run a variety of OSs including Raspbian (Raspberry Pi linux), Ubuntu, Windows 10, and a <a target="_blank" href="https://www.raspberrypi.org/downloads/">bunch</a> more. This is what it looks like:
+<br>
+<br>
+<figure>
+  <img src="../images/Raspberry-Pi-Model-B-Web.jpg"/>
+  <figcaption> The Raspberry Pi 3 Model B ($35) </figcaption> 
+</figure> 
+<figure>
+  <img src="../images/Raspberry-Pi-Model-B-Web-ann.jpg"/>
+  <figcaption> The Raspberry Pi 3 Model B ($35) with annotations </figcaption> 
+</figure>
+  
+<br>
+</p>
+<h3> What do I need to start? </h3>
+<p> 
+If you want to get started with a Raspberry Pi, here's what you should do. No one told me this when I was starting, so it took a couple of days for me to realize I couldn't just plug my raspi into my computer's USB port and start loading scripts on it like an Arduino. If you have a lot of regular computer stuff handy you can do this for as little as $35:
+<ol>
+  <li> <strong> Buy a Raspberry Pi. </strong> While the Raspberry PI foundation designs the Raspberry Pi chips, they do not sell them. They license their technology out to manufacturers, like (my favorite) <a target="_blank" href="https://www.adafruit.com">Adafruit</a>. I recommend <a target="_blank" href="https://www.adafruit.com/product/3055"> this model</a>. </li>
+  <li> <strong> Acquire a keyboard + mouse. </strong> You may have one of these lying around, but if not you can get a cheap one on Amazon or at your local electronics store. You can even borrow one from a friend or from another computer, since you can just SSH in after you've set it up once if you only want to use it as a remote machine. </li> 
+  <li> <strong> Acquire a monitor. </strong> Same as above, you can also just SSH in after you've set it up if you want to use it remotely, so feel free to use your TV or a different machine's monitor. </li> 
+  <li> <strong> Acquire a micro-USB power supply. </strong> Maybe you have one of these lying around from an old cell phone or device, but if you don't you can get one for cheap online. This is a <a target="_blank" href="https://www.adafruit.com/product/1995">nice one</a> on Adafruit.</li>
+  <li> <strong> Get a micro SD card with an OS image. </strong> If you have a micro SD card lying around, you can imprint it with the OS you want. However, for whatever reason I've always struggled with that process, so I buy mine imprinted already in whatever size I need. Here's a cheap <a target="_blank" href="https://www.amazon.com/LoveRPi-8GB-Raspbian-MicroSD-Raspberry/dp/B017JKJEAU/ref=sr_1_3?ie=UTF8&qid=1508197797&sr=8-3&keywords=raspbian+micro+sd">8GB one</a>. </li> 
+</ol> 
+
+<h3> What can I do with that? </h3>
+<p> If you have all that set up, you can pretty much do anything a regular computer can do. You can browse the web, write some scripts, etc. Keep in mind it only has 1 GB of ram, so you probably won't be able to run anything massively hefty, but it works. You can connect them to WiFi or Ethernet as well. 
+</p> 
+
+<h3> What if I want to do more? </h3>
+<p> There's about a million ways to use your Pi thanks to the 40 GPIO (general purpose input/output) pins at the top of the device. Thankfully, Raspberry Pi and Adafruit make it super easy to do so using Raspberry Pi HATs! I think HAT stands for something*, which I've decided is irrelevant to me, because really they are just hats for your raspi to wear. They line up nicely with the device, look pretty, and are a stylish accessory. 
+<br><br>
+<em> Note: I looked this up. HAT stands for Hardware Attached on Top.. I will now imagine all IRL hats actually are this too. </em>
+</p> 
+
+<h3> Where do I get accessories? </h3>
+<p> These also are licensed/built by third parties, so you can buy them on Amazon, Adafruit, The PiHut, or wherever else. I prefer Adafruit or Pi Hut because they have excellent tutorials, libraries, and code snippets for almost all their products. HATs can get kind of expensive (running from a couple dollars to >$50), but they do a ton of heavy lifting by extending the compute power of your chip, and make things a lot easier. Using HATs you can control hundreds of motors, add LCD touch screens, control LED displays, create instruments, and more. Keep in mind that you'll usually need a bit more than the HAT to do anything with it, like sensors, motors, a supplemental power supply, or other electronics gadgets like capacitors or resistors. That's not meant to deter you (since it sounds like a lot), just as a heads up that projects tend to cost $20 more than I initially expect plus a couple days to wait on shipping.</p>
+
+<h3> Ok, I read this, but now I have even more questions than I started with...</h3>
+<p> I plan to do more in this series. Topics I'm considering are intros to: Arduino, circuits, electronics, getting the Arduino/Pi to communicate through Serial ports, soldering, and maybe some project tutorials! Let me know if this was helpful, and what you're interested in reading about, and I can prioritize accordingly. </p>
 
 </body>
 <script>
