@@ -29,7 +29,7 @@ app.get('/blog/poly-flask', function(req, res){
     res.sendFile("/blog/poly-flask.html", {root: '.'});
 });
 
-app.get('/blog/rasp-arduino', function(req, res){
+app.get('/blog/raspi-arduino', function(req, res){
     res.sendFile("/blog/raspi-arduino.html", {root: '.'});
 });
 
