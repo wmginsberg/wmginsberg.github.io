@@ -61,7 +61,6 @@ app.get('/resume-pdf', function(req, res){
     res.sendFile("/resume-pdf.pdf", {root: '.'});
 });
 
-
 // Tell the app to listen for requests on port 8083
 app.listen(port, function () {
   console.log('Example app listening on port '+ port + '!');
