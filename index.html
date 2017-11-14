@@ -2,48 +2,37 @@
 <html>
 <link rel='shortcut icon' href='images/favicon.ico' type='image/x-icon'/ >
 <style>
-body {
-	font-family: sans-serif;
-	background-color: honeydew;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    margin-left: 75px;
-    margin-right: 75px;
+	body {
+		font-family: sans-serif;
+		background-color: honeydew;
+	    margin-top: 50px;
+	    margin-bottom: 50px;
+	    margin-left: 75px;
+	    margin-right: 75px;
+	}
+	img {
+		margin-right: 20px;
+		border: 3px solid honeydew;
+		padding: 3px;
+	}
+	img:hover { border: 3px solid fuchsia; }
+	h1,h2 { font-family: "Lucida Console", Monaco, monospace; }
+	a {
+		color: blue;
+		font-weight: 700;
+		text-decoration: none;
+	}
+	a:hover {
+		color: fuchsia;
+	}
 }
-img {
-	margin-right: 20px;
-	border: 3px solid honeydew;
-	padding: 3px;
-}
-img:hover {
-	border: 3px solid fuchsia;
-}
-h1,h2 {
-    font-family: "Lucida Console", Monaco, monospace;
-}
-span {
-	font-weight: 700px;
-}
-.blue {
-	color: blue;
-}
-.green {
-	color: green;
-}
-.yellow {
-	color: goldenrod;
-}
-.red {
-	color:red;
-}
-a {
-	color: blue;
-	font-weight: 700;
-	text-decoration: none;
-}
-a:hover {
-	color: fuchsia;
-}
+
+span { font-weight: 700px; }
+.blue {	color: blue; }
+.green { color: green; }
+.yellow { color: goldenrod; }
+.red { color:red; }
+
 </style>
 <head>
   <title>Wendy Ginsberg</title>
@@ -53,7 +42,7 @@ a:hover {
   <meta name="author" content="Wendy Ginsberg">
 </head>
 
-<body>
+<body class="standard">
 <h1> Wendy Ginsberg </h1>
 <div class="socialicons">
 	<a href="https://www.twitter.com/wmginsberg"><img src="images/twitter-logo-silhouette.png"></a>
@@ -63,7 +52,7 @@ a:hover {
 </div>
 <h2>About</h2>
 <p>
-	I'm Wendy, a left-handed, lizard-loving Product Manager living in San Francisco, CA. I am currently working at <span class="blue">G</span><span class="red">o</span><span class="yellow">o</span><span class="blue">g</span><span class="green">l</span><span class="red">e</span>.
+	I'm Wendy, a left-handed, lizard-loving Product Manager living in San Francisco, CA. I am currently working at <span class="blue">G</span><span class="red">o</span><span class="yellow">o</span><span class="blue">g</span><span class="green">l</span><span class="red">e</span>. 
 </p>
 
 <h2> Blog </h2>
@@ -109,7 +98,7 @@ a:hover {
 <h2> Projects </h2>
 <ul>
 	<li> <a href="https://www.github.com/wmginsberg/cli-arcade">**CLI Arcade**</a>, a collection of cli-based games like blackjack and hangman </li> 
-	<li> <a href="www.sweaterweather.today">Sweater Weather</a>, a web app that lets you know if it's sweater weather today based on a US zip code. </li> 
+	<li> <a href="https://www.sweaterweather.today">Sweater Weather</a>, a web app that lets you know if it's sweater weather today based on a US zip code. </li> 
 	<li> <a href="https://julian-hq.firebaseapp.com">Julian Monitor</a>, an ongoing RasPi/Arduino project to monitor my lizard's tank and track conditions.</li> 
 	<li> <a href="https://ginsberg-method.firebaseapp.com">Movie Run</a>, a web app to help 2 people make a decision </li>
 	<li> <a href="http://www.didtheknickswin.com">Did the Knicks win?</a>, short updates on knicks scores</li>
